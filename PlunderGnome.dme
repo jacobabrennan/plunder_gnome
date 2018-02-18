@@ -1,0 +1,36 @@
+// BEGIN_INTERNALS
+// END_INTERNALS
+// BEGIN_FILE_DIR
+#define FILE_DIR .
+#define FILE_DIR "rsc"
+#define FILE_DIR "rsc/graphics"
+// END_FILE_DIR
+// BEGIN_PREFERENCES
+#define DEBUG
+// END_PREFERENCES
+// BEGIN_INCLUDE
+#include <iainperegrine\dmm_suite\dmm_suite.dme>
+#include <kaiochao\anymacro\AnyMacro.dme>
+#include <oasiscircle\mathematics\Mathematics.dme>
+#include <theodis\priorityqueue\PriorityQueue.dme>
+#include "version_history.dm"
+#include "basic.dmf"
+#include "__secure\password.dm"
+#include "code\01_defines.dm"
+#include "code\02_system.dm"
+#include "code\03_junk.dm"
+#include "code\atomic_modification.dm"
+#include "code\character.dm"
+#include "code\game.dm"
+#include "code\intelligence.dm"
+#include "code\interface.dm"
+#include "code\mapping_typedefs.dm"
+#include "code\movement_and_keystate.dm"
+#include "code\pathfinding.dm"
+#include "code\radishes.dm"
+#include "code\social.dm"
+#include "code\team.dm"
+#include "code\title_screen.dm"
+#include "code\utilities.dm"
+#include "maps\title_screen.dmm"
+// END_INCLUDE

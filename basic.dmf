@@ -1,0 +1,143 @@
+macro "macro"
+	elem 
+		name = "Q"
+		command = "forceReboot"
+	elem 
+		name = "R"
+		command = "reboot"
+
+
+menu "menu"
+	elem 
+		name = "&File"
+		command = ""
+		saved-params = "is-checked"
+	elem 
+		name = "&Quit"
+		command = ".quit"
+		category = "&File"
+		saved-params = "is-checked"
+	elem 
+		name = "asdf"
+		command = ""
+		category = "&File"
+		saved-params = "is-checked"
+
+
+window "channelGame"
+	elem "channelGame"
+		type = MAIN
+		pos = 281,0
+		size = 510x393
+		anchor1 = none
+		anchor2 = none
+		saved-params = "pos;size;is-minimized;is-maximized"
+		title = "Game Chat"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		is-pane = true
+		icon = 'rsc\\graphics\\tab_icon_game.dmi'
+	elem "chatGame"
+		type = INPUT
+		pos = 0,373
+		size = 510x20
+		anchor1 = 0,100
+		anchor2 = 100,100
+		font-family = "Georgia"
+		text-color = #ffffff
+		background-color = #331900
+		border = line
+		saved-params = ""
+		command = "sayGame"
+	elem "outputChannelGame"
+		type = OUTPUT
+		pos = 0,0
+		size = 510x373
+		anchor1 = 0,0
+		anchor2 = 100,100
+		font-family = "Georgia"
+		text-color = #ffffff
+		background-color = #190c00
+		saved-params = "max-lines"
+		link-color = #8080ff
+
+window "channelSystem"
+	elem "channelSystem"
+		type = MAIN
+		pos = 281,0
+		size = 510x393
+		anchor1 = none
+		anchor2 = none
+		saved-params = "pos;size;is-minimized;is-maximized"
+		title = "Server Chat"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		is-pane = true
+		icon = 'rsc\\graphics\\tab_icon_server.dmi'
+	elem "chatSystem"
+		type = INPUT
+		pos = 0,373
+		size = 510x20
+		anchor1 = 0,100
+		anchor2 = 100,100
+		font-family = "Georgia"
+		text-color = #ffffff
+		background-color = #331900
+		border = line
+		saved-params = ""
+		command = "saySystem"
+	elem "outputChannelSystem"
+		type = OUTPUT
+		pos = 0,0
+		size = 510x373
+		anchor1 = 0,0
+		anchor2 = 100,100
+		font-family = "Georgia"
+		text-color = #ffffff
+		background-color = #190c00
+		is-default = true
+		saved-params = "max-lines"
+		link-color = #8080ff
+
+window "main"
+	elem "main"
+		type = MAIN
+		pos = 281,0
+		size = 860x416
+		anchor1 = none
+		anchor2 = none
+		background-color = #190c00
+		is-default = true
+		saved-params = "pos;size;is-minimized;is-maximized"
+		title = "Plunder Gnome"
+		statusbar = false
+		icon = 'rsc\\graphics\\window_icon.dmi'
+		macro = "macro"
+		menu = "menu"
+	elem "chatChannels"
+		type = TAB
+		pos = 608,0
+		size = 252x416
+		anchor1 = 71,0
+		anchor2 = 100,100
+		font-family = "Georgia"
+		font-style = "bold"
+		text-color = #cc9966
+		background-color = #190c00
+		saved-params = ""
+		tabs = "channelSystem"
+	elem "map1"
+		type = MAP
+		pos = 0,0
+		size = 608x416
+		anchor1 = 0,0
+		anchor2 = 71,100
+		is-default = true
+		saved-params = "zoom;letterbox;zoom-mode"
+

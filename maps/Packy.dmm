@@ -1,0 +1,38 @@
+"a" = (/tile/bush{icon_state = "tree_waste"},/area)
+"e" = (/tile/lawn,/area)
+"h" = (/tile/houseOverhang,/tile/lawn,/area)
+"i" = (/tile/houseOverhang{tag = "icon-roof_back_right"; icon_state = "roof_back_right"},/tile/lawn,/area)
+"j" = (/tile/house{tag = "icon-roof_left"; icon_state = "roof_left"; layer = 5},/area)
+"k" = (/tile/house{tag = "icon-roof_corner_right"; icon_state = "roof_corner_right"; layer = 5},/area)
+"l" = (/tile/house{tag = "icon-roof_front"; icon_state = "roof_front"; layer = 5},/area)
+"m" = (/tile/house{tag = "icon-roof_corner_left"; icon_state = "roof_corner_left"; layer = 5},/area)
+"n" = (/tile/house{tag = "icon-roof_right"; icon_state = "roof_right"; layer = 5},/area)
+"o" = (/tile/house{tag = "icon-front_top_right"; icon_state = "front_top_right"},/area)
+"p" = (/tile/house{tag = "icon-front_top_left"; icon_state = "front_top_left"},/area)
+"q" = (/tile/house{tag = "icon-shutters"; icon_state = "shutters"},/area)
+"r" = (/tile/house{tag = "icon-shutters2"; icon_state = "shutters2"},/area)
+"s" = (/tile/goal{tag = "red_goal"; icon_state = "door"; team = "red"},/area)
+"t" = (/tile/goal{tag = "blue_goal"; icon_state = "door2"; team = "blue"},/area)
+"u" = (/tile/farm,/area)
+"y" = (/placementMarker/position_blue_3,/tile/lawn,/area)
+"z" = (/placementMarker/position_red_3,/tile/lawn,/area)
+"A" = (/placementMarker/position_red_2,/tile/lawn,/area)
+"B" = (/placementMarker/position_blue_2,/tile/lawn,/area)
+"C" = (/placementMarker/position_red_1,/tile/lawn,/area)
+"D" = (/placementMarker/position_blue_1,/tile/lawn,/area)
+
+(1,1,1) = {"
+eeeeeeeeeeeeeeeeeee
+eeeeeeeeeeeeeeeeeee
+eeeeeeeaeeeaeeeeeee
+eeeeeeaeeeeeaeeeeee
+eeeeeeeaeeeaeeeeeee
+eeeeeyeeaeaeezeeeee
+eeehieeaeeeaeehieee
+eAejkleeaeaeelmneBe
+eeeopqeaeeeaeropeee
+eeesqeaeaeaeaerteee
+eeeCeeeeeaeeeeeDeee
+eeeeeuuueaeuuueeeee
+eeeeeuuueaeuuueeeee
+"}

@@ -1,0 +1,59 @@
+"a" = (/tile/lawn{icon_state = "leaves"; tag = ""},/tile/bush{icon_state = "tree_brown"},/area)
+"b" = (/tile/lawn{icon_state = "leaves"; tag = ""},/tile/houseOverhang,/tile/bush{icon_state = "tree_brown"},/area)
+"c" = (/tile/lawn{icon_state = "leaves"; tag = ""},/tile/houseOverhang{tag = "icon-roof_back_right"; icon_state = "roof_back_right"},/tile/bush{icon_state = "tree_red"},/area)
+"d" = (/tile/lawn{icon_state = "leaves"; tag = ""},/tile/bush{icon_state = "tree_red"},/area)
+"e" = (/tile/lawn{icon_state = "leaves"; tag = ""},/area)
+"f" = (/tile/house{icon_state = "roof_left"; tag = ""},/area)
+"g" = (/tile/house{icon_state = "roof_right"; tag = ""},/area)
+"h" = (/tile/lawn,/tile/lawn{icon_state = "leaves_se"; tag = ""},/area)
+"i" = (/tile/lawn,/tile/lawn{icon_state = "leaves_sw"; tag = ""},/area)
+"j" = (/critter/ruttle,/tile/lawn{icon_state = "leaves"; tag = ""},/area)
+"k" = (/tile/farm,/area)
+"l" = (/tile/house{icon_state = "front_top_right"; tag = ""},/area)
+"m" = (/tile/house{icon_state = "front_top_left"; tag = ""},/area)
+"n" = (/tile/lawn{icon_state = "leaves_se"; tag = ""},/tile/bush{icon_state = "tree_red"},/area)
+"o" = (/placementMarker/position_blue_3,/tile/lawn{icon_state = "leaves"; tag = ""},/area)
+"p" = (/tile/house{icon_state = "shutters"; tag = ""},/area)
+"q" = (/tile/lawn{icon_state = "leaves"; tag = ""},/tile/houseOverhang{tag = "icon-roof_back_right"; icon_state = "roof_back_right"},/tile/bush{icon_state = "tree_brown"},/area)
+"r" = (/tile/lawn,/tile/lawn{icon_state = "leaves_ne"; tag = ""},/area)
+"s" = (/tile/lawn,/area)
+"t" = (/tile/lawn,/tile/lawn{icon_state = "leaves_nw"; tag = ""},/area)
+"u" = (/placementMarker/position_blue_2,/tile/lawn{icon_state = "leaves"; tag = ""},/area)
+"v" = (/tile/goal{icon_state = "door"; tag = ""; team = "blue"},/area)
+"w" = (/tile/lawn{icon_state = "leaves_ne"; tag = ""},/tile/bush{icon_state = "tree_brown"},/area)
+"x" = (/tile/lawn,/tile/lawn{icon_state = "leaves"; tag = ""},/area)
+"y" = (/tile/lawn{icon_state = "leaves_nw"; tag = ""},/tile/bush{icon_state = "tree_brown"},/area)
+"z" = (/placementMarker/position_blue_1,/tile/lawn,/area)
+"A" = (/tile/farm{icon_state = "leaves_se"; tag = ""},/area)
+"B" = (/critter/ruttle{dir = 8},/tile/lawn{icon_state = "leaves"; tag = ""},/area)
+"C" = (/tile/lawn{icon_state = "leaves_se"; tag = ""},/area)
+"D" = (/tile/farm{icon_state = "green"; tag = ""},/area)
+"E" = (/tile/farm{icon_state = "leaves_sw"; tag = ""},/area)
+"F" = (/critter/ruttle{dir = 4},/tile/farm{icon_state = "green"; tag = ""},/area)
+"G" = (/tile/lawn{icon_state = "leaves_sw"; tag = ""},/area)
+"H" = (/tile/farm{icon_state = "leaves_nw"; tag = ""},/area)
+"I" = (/placementMarker/position_red_2,/tile/lawn{icon_state = "leaves"; tag = ""},/area)
+"J" = (/tile/farm{icon_state = "leaves_ne"; tag = ""},/area)
+"K" = (/tile/goal{icon_state = "door"; tag = ""; team = "red"},/area)
+"L" = (/tile/lawn,/tile/bush{icon_state = "tree_brown"},/area)
+"M" = (/tile/lawn{icon_state = "leaves_ne"; tag = ""},/area)
+"N" = (/tile/lawn{icon_state = "leaves_nw"; tag = ""},/area)
+"O" = (/placementMarker/position_red_3,/tile/lawn{icon_state = "leaves"; tag = ""},/area)
+"Q" = (/critter/ruttle{dir = 1},/tile/lawn{icon_state = "leaves"; tag = ""},/area)
+"U" = (/placementMarker/position_red_1,/tile/lawn,/area)
+
+(1,1,1) = {"
+aabcadaeeeeeeeeeeee
+kkfghiaedeedjedeede
+kklmssdeueeeeeeeoee
+kkvpssadaeeadaadeee
+rszssteeeeedADEeede
+xrtrtxeeeeenDDDEeee
+adbqadaaadaLDFDDeBe
+kkfgCGeeeeewDDDHeee
+kklmssGeeeeaJDHeede
+kkKpssyadeeadadaeee
+MsUssNaeIeeeeeeeOee
+eMNMNeaedeedQedeede
+aaaadadeeeeeeeeeeee
+"}

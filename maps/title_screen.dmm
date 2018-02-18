@@ -1,0 +1,24 @@
+"aa" = (/turf{tag = "title_location"},/area)
+"dk" = (/interface/titleScreen/button/join_red/left,/turf,/area)
+"dl" = (/interface/titleScreen/button/join_red/center,/turf,/area)
+"dm" = (/interface/titleScreen/button/join_red/right,/turf,/area)
+"dD" = (/interface/titleScreen/button/join_blue/left,/turf,/area)
+"dE" = (/interface/titleScreen/button/join_blue/center,/turf,/area)
+"dF" = (/interface/titleScreen/button/join_blue/right,/turf,/area)
+"dW" = (/turf,/area)
+
+(1,1,1) = {"
+dWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdW
+dWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdW
+dWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdW
+dWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdW
+dWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdW
+dWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdW
+dWdWdWdWdWdWdkdldmdWdDdEdFdWdWdWdWdWdW
+dWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdW
+dWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdW
+dWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdW
+dWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdW
+dWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdW
+aadWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdW
+"}

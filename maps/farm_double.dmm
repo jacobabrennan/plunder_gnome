@@ -1,0 +1,39 @@
+"a" = (/placementMarker/position_red_3,/tile/path,/area)
+"b" = (/placementMarker/position_blue_3,/tile/path,/area)
+"e" = (/tile/lawn,/area)
+"g" = (/placementMarker/position_red_2,/tile/farm,/area)
+"h" = (/placementMarker/position_blue_2,/tile/farm,/area)
+"i" = (/tile/houseOverhang,/tile/lawn,/area)
+"j" = (/tile/houseOverhang{icon_state = "roof_back_right"},/tile/lawn,/area)
+"k" = (/tile/house{icon_state = "roof_left"; layer = 5},/area)
+"l" = (/tile/house{icon_state = "roof_corner_right"; layer = 5},/area)
+"m" = (/tile/house{icon_state = "roof_front"; layer = 5},/area)
+"n" = (/tile/bush,/area)
+"o" = (/tile/house{icon_state = "roof_corner_left"; layer = 5},/area)
+"p" = (/tile/house{icon_state = "roof_right"; layer = 5},/area)
+"q" = (/tile/house{icon_state = "front_top_right"},/area)
+"r" = (/tile/house{icon_state = "front_top_left"},/area)
+"s" = (/tile/house{icon_state = "shutters"},/area)
+"t" = (/tile/farm,/area)
+"w" = (/tile/house{icon_state = "shutters2"},/area)
+"x" = (/tile/goal{tag = "red_goal"; icon_state = "door"; team = "red"},/area)
+"y" = (/placementMarker/position_red_1,/tile/path,/area)
+"z" = (/placementMarker/position_blue_1,/tile/path,/area)
+"A" = (/tile/goal{tag = "blue_goal"; icon_state = "door2"; team = "blue"},/area)
+"D" = (/tile/path,/area)
+
+(1,1,1) = {"
+eeeeeeeeeeeeeeeeeee
+eeeeeeeeeeeeeeeeeee
+eijeeeeeeeeeeeeeije
+eklmnnneeeeennnmope
+eqrstgteeeeethtwqre
+exsnttteeeeetttnwAe
+eyenttteeeeetttneze
+eDenttteeeeetttneDe
+eDenttteeeeetttneDe
+eDeeeeeeeeeeeeeeeDe
+eDDDDDaDDDDDbDDDDDe
+eeeeeeeeeeeeeeeeeee
+eeeeeeeeeeeeeeeeeee
+"}

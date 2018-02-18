@@ -1,0 +1,45 @@
+"a" = (/tile/lawn,/area)
+"b" = (/tile/path,/area)
+"c" = (/tile/farm,/area)
+"d" = (/placementMarker/position_red_1,/tile/lawn,/area)
+"e" = (/tile/goal{tag = "red_goal"; icon_state = "door"; team = "red"},/area)
+"f" = (/tile/bush,/area)
+"g" = (/tile/goal{tag = "yellow_goal"; icon_state = "door2"; team = "yellow"},/area)
+"h" = (/placementMarker/position_red_2,/tile/path,/area)
+"i" = (/tile/goal{tag = "green_goal"; icon_state = "door"; team = "green"},/area)
+"j" = (/tile/goal{tag = "blue_goal"; icon_state = "door2"; team = "blue"},/area)
+"k" = (/tile/houseOverhang,/tile/bush,/area)
+"l" = (/tile/houseOverhang{icon_state = "roof_back_right"},/tile/bush,/area)
+"m" = (/tile/houseOverhang,/tile/lawn,/area)
+"n" = (/tile/houseOverhang{tag = "icon-roof_back_right"; icon_state = "roof_back_right"},/tile/lawn,/area)
+"o" = (/tile/houseOverhang{tag = "icon-roof_front"; icon_state = "roof_front"},/tile/lawn,/area)
+"q" = (/tile/house{tag = "icon-roof_corner_left"; icon_state = "roof_corner_left"; layer = 5},/turf,/area)
+"r" = (/tile/house{tag = "icon-roof_right"; icon_state = "roof_right"; layer = 5},/turf,/area)
+"s" = (/tile/house{tag = "icon-roof_left"; icon_state = "roof_left"; layer = 5},/turf,/area)
+"t" = (/tile/house{tag = "icon-roof_corner_right"; icon_state = "roof_corner_right"; layer = 5},/turf,/area)
+"v" = (/tile/house{tag = "icon-front_top_right"; icon_state = "front_top_right"},/turf,/area)
+"w" = (/tile/house{tag = "icon-front_top_left"; icon_state = "front_top_left"},/turf,/area)
+"y" = (/tile/house{tag = "icon-shutters2"; icon_state = "shutters2"},/turf,/area)
+"z" = (/tile/house{tag = "icon-shutters"; icon_state = "shutters"},/turf,/area)
+
+(1,1,1) = {"
+aaaaaaafffffaaaaaaa
+abbbbbbbbbbbbbbbbba
+abcccccfffffcccccba
+abcccccaafaacccccba
+abcccccaafaacccccba
+abcccdamnfmnaacccba
+abcccaoqrfstoacccba
+fbfaaaevwfvwgaaafbf
+fbfaaaayzfyzaaaafbf
+fhfffffklfklfffffbf
+fbfaaaoqrfstoaaafbf
+fbfaaaivwfvwjaaafbf
+abcccaayzfyzaacccba
+abcccaaaafaaaacccba
+abcccccaafaacccccba
+abcccccaafaacccccba
+abcccccfffffcccccba
+abbbbbbbbbbbbbbbbba
+aaaaaaafffffaaaaaaa
+"}

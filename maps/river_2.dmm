@@ -1,0 +1,46 @@
+"a" = (/tile/bush,/tile/houseOverhang,/area)
+"b" = (/tile/bush,/tile/houseOverhang{icon_state = "roof_back_right"},/area)
+"c" = (/tile/water,/area)
+"g" = (/tile/lawn,/area)
+"i" = (/tile/house{tag = "icon-roof_left"; icon_state = "roof_left"; layer = 5},/area)
+"j" = (/tile/house{tag = "icon-roof_right"; icon_state = "roof_right"; layer = 5},/area)
+"k" = (/tile/bush,/area)
+"n" = (/tile/houseOverhang{tag = "icon-roof_front"; icon_state = "roof_front"},/tile/lawn,/area)
+"o" = (/tile/house{tag = "icon-roof_corner_left"; icon_state = "roof_corner_left"; layer = 5},/area)
+"p" = (/tile/house{tag = "icon-front_top_right"; icon_state = "front_top_right"},/area)
+"q" = (/tile/house{tag = "icon-front_top_left"; icon_state = "front_top_left"},/area)
+"r" = (/tile/farm,/area)
+"s" = (/tile/house{tag = "icon-roof_corner_right"; icon_state = "roof_corner_right"; layer = 5},/area)
+"t" = (/tile/house{tag = "icon-shutters2"; icon_state = "shutters2"},/area)
+"u" = (/tile/house{tag = "icon-shutters"; icon_state = "shutters"},/area)
+"v" = (/placementMarker/position_red_2,/tile/farm,/area)
+"w" = (/placementMarker/position_blue_2,/tile/farm,/area)
+"x" = (/tile/goal{tag = "red_goal"; icon_state = "door"; team = "red"},/area)
+"y" = (/tile/house{tag = "icon-siding2"; icon_state = "siding2"},/area)
+"z" = (/tile/house,/area)
+"A" = (/tile/goal{tag = "blue_goal"; icon_state = "door2"; team = "blue"},/area)
+"B" = (/placementMarker/position_red_1,/tile/path,/area)
+"C" = (/placementMarker/position_blue_1,/tile/path,/area)
+"D" = (/tile/path,/area)
+"E" = (/critter/salty{dir = 4},/tile/lawn,/area)
+"F" = (/placementMarker/position_red_3,/tile/lawn,/area)
+"G" = (/placementMarker/position_blue_3,/tile/lawn,/area)
+"H" = (/critter/salty{dir = 8},/tile/lawn,/area)
+"I" = (/tile/lawn{tag = "icon-water_ne"; icon_state = "water_ne"},/area)
+"J" = (/tile/lawn{tag = "icon-water_nw"; icon_state = "water_nw"},/area)
+
+(1,1,1) = {"
+kkkabkkkkkkkkkabkkk
+kkaijkrrrkrrrkijbkk
+knopqgrrrkrrrgpqsnk
+ktptugrvrkrwrgtuquk
+kktxygrrrkrrrgzAukk
+kkgBgggggkgggggCgkk
+kkgDgggkkkkkgggDgkk
+gggDDDDDDDDDDDDDggg
+ggEgggggggggggggHgg
+IggggggFgggGggggggJ
+cIJIgggggggggggJIJc
+ccccIJIJIgJIJIJcccc
+ccccccccccccccccccc
+"}
