@@ -8,7 +8,7 @@ character
 	movement = MOVEMENT_FLOOR
 	var
 		strength = 1
-		capacity = CARRY_MAX
+		capacity = 5
 		// Nonconfigurable:
 		intelligence/player
 		team
@@ -96,10 +96,10 @@ character
 
 		bounce(character/bouncer, bounceDir)
 			switch(bounceDir)
-				if(NORTH) velocity.y += 6
-				if(SOUTH) velocity.y -= 6
-				if(EAST ) velocity.x += 6
-				if(WEST ) velocity.x -= 6
+				if(NORTH) velocity.y += 12
+				if(SOUTH) velocity.y -= 12
+				if(EAST ) velocity.x += 12
+				if(WEST ) velocity.x -= 12
 
 
 	Cross(var/character/crosser)
@@ -137,20 +137,29 @@ character
 character
 	//var
 		//strength = 1
-	george // Basic Gnome
+	mathew // Fast Gnome
+		icon = 'fast_gnome.dmi'
+		bound_height = 12
+		bound_width  = 9
+		bound_x = 3
+		capacity = 2
+		strength = 2
+		accl = 0.75
+		max_vel = 3
+	george // Medium Gnome
 		icon = 'base_gnome.dmi'
 		bound_height = 14
 		bound_width  = 12
 		bound_x = 2
 		capacity = 5
 		strength = 4
-		accl = 1
+		accl = 0.75
 		max_vel = 2
-	mathew // Basic Gnome
-		icon = 'fat_gnome.dmi'
+	glen // Strong Gnome
+		icon = 'strong_gnome.dmi'
 		bound_height = 16
 		bound_width  = 16
-		capacity = 8
+		capacity = 7
 		strength = 6
 		accl = 1
 		max_vel = 1

@@ -148,6 +148,7 @@ system
 	mapManager
 		parent_type = /dmm_suite
 		var/list/gameMaps = list(
+			'maps/farm_4.dmm',/*
 			'maps/farm_double.dmm',
 			'maps/farm_double.dmm',
 			'maps/farm_double.dmm',
@@ -159,7 +160,7 @@ system
 			'maps/river_1.dmm',
 
 			'maps/river_2.dmm',
-			'maps/river_2.dmm',
+			'maps/river_2.dmm',*/
 		)
 		proc
 			loadMap(game/gameArea)

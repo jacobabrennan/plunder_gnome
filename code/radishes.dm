@@ -86,13 +86,13 @@ radish
 
 system
 	var
-		list/radishMeters3 = new(4)
+		list/radishMeters2 = new(3)
 		list/radishMeters5 = new(6)
-		list/radishMeters8 = new(9)
+		list/radishMeters7 = new(8)
 	New()
 		. = ..()
 		// Prepare radish meter overlays
-		var /list/meterLists = list(radishMeters3, radishMeters5, radishMeters8)
+		var /list/meterLists = list(radishMeters2, radishMeters5, radishMeters7)
 		var /obj/temp
 		for(var/list/meter in meterLists)
 			for(var/I = 1 to meter.len)
@@ -124,9 +124,9 @@ character
 			// Refresh the carried radishes display
 			overlays.Remove(radishMeter)
 			switch(capacity)
-				if(3) radishMeter = system.radishMeters3[radishes+1]
+				if(2) radishMeter = system.radishMeters2[radishes+1]
 				if(5) radishMeter = system.radishMeters5[radishes+1]
-				if(8) radishMeter = system.radishMeters8[radishes+1]
+				if(7) radishMeter = system.radishMeters7[radishes+1]
 			overlays.Add(radishMeter)
 			// Return the actual adjustment quantity
 			return radishes - oldRadishCount

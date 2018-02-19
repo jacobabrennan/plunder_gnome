@@ -1,5 +1,7 @@
 "a" = (/placementMarker/position_red_3,/tile/path,/area)
 "b" = (/placementMarker/position_blue_3,/tile/path,/area)
+"c" = (/placementMarker/position_red_cpu,/tile/house{icon_state = "front_top_right"},/area)
+"d" = (/placementMarker/position_blue_cpu,/tile/house{icon_state = "front_top_right"},/area)
 "e" = (/tile/lawn,/area)
 "g" = (/placementMarker/position_red_2,/tile/farm,/area)
 "h" = (/placementMarker/position_blue_2,/tile/farm,/area)
@@ -11,7 +13,6 @@
 "n" = (/tile/bush,/area)
 "o" = (/tile/house{icon_state = "roof_corner_left"; layer = 5},/area)
 "p" = (/tile/house{icon_state = "roof_right"; layer = 5},/area)
-"q" = (/tile/house{icon_state = "front_top_right"},/area)
 "r" = (/tile/house{icon_state = "front_top_left"},/area)
 "s" = (/tile/house{icon_state = "shutters"},/area)
 "t" = (/tile/farm,/area)
@@ -27,7 +28,7 @@ eeeeeeeeeeeeeeeeeee
 eeeeeeeeeeeeeeeeeee
 eijeeeeeeeeeeeeeije
 eklmnnneeeeennnmope
-eqrstgteeeeethtwqre
+ecrstgteeeeethtwdre
 exsnttteeeeetttnwAe
 eyenttteeeeetttneze
 eDenttteeeeetttneDe

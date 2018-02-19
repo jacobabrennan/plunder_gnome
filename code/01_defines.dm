@@ -21,7 +21,6 @@ Player - A human or AI controller character instance in a game instance
 
 #define PRIMARY 1
 #define TICK_DELAY (1/2)
-#define CARRY_MAX 5
 	// The number of radishes a character can carry
 #define DELAY_PLUNDER 5
 	// How long it takes for a character to plunder a radish
@@ -29,6 +28,7 @@ Player - A human or AI controller character instance in a game instance
 	// How long a player remains stunned
 #define TIME_INVULNERABLE 20
 	// How long a player is invulnerable after being stunned
+#define MAX_VELOCITY 6
 
 //-- Mapping System ------------------------------------------------------------
 

@@ -22,10 +22,9 @@ system
 /*-- Feature List --------------------------------------------------------------
 
 Focus - Things which must be done this version
-	Git init
+	AI
 
 Upcomming - Feature candidates for the next version
-	AI
 	Select other characters (moles, etc)
 		With differing weights and speeds
 	Find old source with other maps & critters

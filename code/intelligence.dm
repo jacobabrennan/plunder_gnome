@@ -21,7 +21,11 @@ character/rival
 		character = newChar
 		team = character.team
 	control(character/controlChar)
-		var commands = call(src, dominantGoal)()
+		var commands = danger()
+		if(commands)
+			switchGoal("farm")
+		else
+			commands = call(src, dominantGoal)()
 		return commands
 
 
@@ -33,7 +37,7 @@ character/rival
 		if(!path || !path.len)
 			return 0
 		var /turf/nextStep = path[1]
-		if(nextStep in character.locs)// == nextStep && character.locs.len == 1)
+		if(nextStep in character.locs)
 			path.Cut(1,2)
 			if(path.len)
 				nextStep = path[1]
@@ -99,17 +103,21 @@ character/rival
 			if(!target && character.radishes)
 				switchGoal("deliver")
 				return
-			// If still no target, pick one of own team's farms
+			// If still no target, see if we have radishes on the farm
 			if(!target)
 				var /game/ownGame = game(character)
 				var /team/ownTeam = ownGame.teams[team]
-				target = pick(ownTeam.farms)
-				path = null
+				var /tile/farm/ownFarm = pick(ownTeam.farms)
+				if(locate(/radish) in obounds(ownFarm, TILE_SIZE*2))
+					switchGoal("farm")
+			// Otherwise, go raiding
+				else
+					switchGoal("plunder")
 			// If no Path, get path
 			if(!path && target && !(target in locs))
 				getPath(target)
+				if(!path) return
 			// Find direction to target
-			ASSERT(target)
 			return trackPath(target)
 
 		deliver()
@@ -125,6 +133,68 @@ character/rival
 				getPath(target)
 			// Find direction to target
 			return trackPath(target)
+
+		plunder()
+			var /game/ownGame = game(character)
+			var /team/opponentTeam
+			// Get the opposite team's goal
+			if(!target)
+				var /team/ownTeam = ownGame.teams[team]
+				for(var/teamColor in ownGame.teams)
+					opponentTeam = ownGame.teams[teamColor]
+					if(opponentTeam == ownTeam || !opponentTeam.score)
+						opponentTeam = null
+						continue
+					break
+				if(!opponentTeam)
+					switchGoal("farm")
+					return
+				target = opponentTeam.goal
+				getPath(target)
+			//
+			var /tile/goal/goalTarget = target
+			opponentTeam = ownGame.teams[goalTarget.team]
+			if(character.radishes == character.capacity || !opponentTeam.score)
+				switchGoal("deliver")
+			return trackPath(target)
+
+	var
+		list/reactionQueue = new(7)
+	proc
+		danger()
+			// Find the closest hostile target
+			var /list/closeList = obounds(character, 16)
+			var /character/closeTarget
+			var closeDist = 99999
+			var /character/testTarget
+			do
+				testTarget = locate(/character) in closeList
+				if(!testTarget)
+					break
+				closeList.Remove(testTarget)
+				// Determine if target is hostile, can reach us, or we can reach it
+				if(testTarget.team == character.team) continue
+				if(testTarget.stunned || testTarget.invulnerable) continue
+				var closing = ((testTarget.dir&testTarget.directionTo(character)) && testTarget.max_vel > character.max_vel)
+				var radishes = (testTarget.radishes > character.radishes && character.max_vel > testTarget.max_vel)
+				if(!closing && !radishes) continue
+				//
+				var testDist = bounds_dist(character, testTarget)
+				if(testDist < closeDist)
+					closeDist = testDist
+					closeTarget = testTarget
+			while(testTarget)
+			// Determine danger command
+			var commands = 0
+			if(closeTarget)
+				commands = character.directionTo(closeTarget)
+			// Manage danger queue
+			reactionQueue.Add(commands)
+			commands = reactionQueue[1]
+			reactionQueue.Cut(1,2)
+			return commands
+
+
 
 #ifdef SomeAINotes
 Farm

@@ -1,3 +1,5 @@
+"a" = (/placementMarker/position_red_cpu,/tile/house{tag = "icon-front_top_right"; icon_state = "front_top_right"},/area)
+"b" = (/placementMarker/position_blue_cpu,/tile/house{tag = "icon-front_top_right"; icon_state = "front_top_right"},/area)
 "e" = (/tile/bush{icon_state = "tree_snow"},/area)
 "f" = (/tile/snow,/area)
 "g" = (/placementMarker/position_red_2,/tile/farm,/area)
@@ -14,7 +16,6 @@
 "s" = (/tile/house{tag = "icon-roof_front"; icon_state = "roof_front"; layer = 5},/area)
 "v" = (/tile/house{tag = "icon-roof_corner_left"; icon_state = "roof_corner_left"; layer = 5},/area)
 "w" = (/tile/house{tag = "icon-roof_right"; icon_state = "roof_right"; layer = 5},/area)
-"x" = (/tile/house{tag = "icon-front_top_right"; icon_state = "front_top_right"},/area)
 "y" = (/tile/house{tag = "icon-front_top_left"; icon_state = "front_top_left"},/area)
 "z" = (/tile/house{tag = "icon-shutters"; icon_state = "shutters"},/area)
 "A" = (/tile/house{tag = "icon-shutters2"; icon_state = "shutters2"},/area)
@@ -26,7 +27,7 @@ eefffffffffffffffee
 efffffffkkkeffffffe
 ffmnffffkgkefffmnff
 ffqrsfffkkkefpsvwff
-ffxyzfffkkkeffAxyff
+ffayzfffkkkeffAbyff
 ffBzfffffffefffACff
 ffiffffefffefffflff
 fffffffefffffffffff

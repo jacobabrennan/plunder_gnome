@@ -1,0 +1,56 @@
+"a" = (/tile/lawn,/area)
+"b" = (/tile/houseOverhang,/tile/bush,/area)
+"c" = (/tile/houseOverhang{icon_state = "roof_back_right"},/tile/bush,/area)
+"d" = (/placementMarker/position_red_3,/tile/lawn,/area)
+"e" = (/placementMarker/position_green_3,/tile/lawn,/area)
+"f" = (/tile/lawn,/tile/house{tag = "icon-roof_front"; icon_state = "roof_front"},/area)
+"g" = (/tile/bush,/area)
+"h" = (/tile/lawn,/tile/house{tag = "icon-roof_corner_left"; icon_state = "roof_corner_left"},/area)
+"i" = (/tile/lawn,/tile/house{tag = "icon-roof_corner_right"; icon_state = "roof_corner_right"},/area)
+"j" = (/tile/houseOverhang{icon_state = "roof_front"; tag = ""},/tile/lawn,/area)
+"k" = (/tile/house{tag = "icon-roof_corner_left"; icon_state = "roof_corner_left"},/area)
+"l" = (/tile/house{tag = "icon-roof_corner_right"; icon_state = "roof_corner_right"},/area)
+"m" = (/tile/farm,/area)
+"n" = (/placementMarker/position_red_2,/tile/farm,/area)
+"o" = (/placementMarker/position_blue_2,/tile/farm,/area)
+"p" = (/tile/houseOverhang{icon_state = "roof_front"; tag = ""},/turf,/area)
+"q" = (/tile/lawn,/tile/house{tag = "icon-shutters2"; icon_state = "shutters2"},/area)
+"r" = (/tile/goal{tag = "red_goal"; icon_state = "door"; team = "red"},/area)
+"s" = (/tile/lawn,/placementMarker/position_red_cpu,/tile/house{tag = "icon-front_top_right"; icon_state = "front_top_right"},/area)
+"t" = (/tile/lawn,/tile/house{tag = "icon-front_top_left"; icon_state = "front_top_left"},/area)
+"u" = (/placementMarker/position_red_1,/tile/lawn,/area)
+"v" = (/placementMarker/position_green_1,/tile/lawn,/area)
+"w" = (/tile/goal{icon_state = "door2"; tag = ""; team = "blue"},/area)
+"x" = (/tile/goal{icon_state = "door2"; tag = ""; team = "green"},/area)
+"y" = (/tile/house{tag = "icon-shutters"; icon_state = "shutters"},/area)
+"z" = (/tile/lawn,/tile/house,/area)
+"A" = (/tile/lawn,/tile/house{tag = "icon-shutters"; icon_state = "shutters"},/area)
+"B" = (/tile/house{tag = "icon-shutters2"; icon_state = "shutters2"},/area)
+"C" = (/tile/house{tag = "icon-siding2"; icon_state = "siding2"},/area)
+"D" = (/placementMarker/position_green_2,/tile/farm,/area)
+"E" = (/placementMarker,/tile/lawn,/area)
+"F" = (/placementMarker/position_yellow_2,/tile/farm,/area)
+"G" = (/tile/lawn,/placementMarker/position_green_cpu,/tile/house{tag = "icon-front_top_right"; icon_state = "front_top_right"},/area)
+"H" = (/placementMarker/position_yellow_1,/tile/lawn,/area)
+"I" = (/placementMarker/position_blue_1,/tile/lawn,/area)
+"J" = (/tile/lawn,/placementMarker/position_yellow_cpu,/tile/house{tag = "icon-front_top_right"; icon_state = "front_top_right"},/area)
+"K" = (/placementMarker/position_yellow_3,/tile/lawn,/area)
+"L" = (/placementMarker/position_blue_3,/tile/lawn,/area)
+"M" = (/tile/goal{icon_state = "door"; tag = "yellow_goal"; team = "yellow"},/area)
+"N" = (/tile/lawn,/placementMarker/position_blue_cpu,/tile/house{tag = "icon-front_top_right"; icon_state = "front_top_right"},/area)
+
+(1,1,1) = {"
+gbcaaaaaaaaaaaaabcg
+fhijaaaaaaaaaaajklp
+qstrauammammavaxGty
+gzAaaammmgmmmaaaBCg
+gggdammnmgmDmmaeggg
+gggaammmaaammmaaggg
+ggggggaaaEaaagggggg
+gggaammmaaammmaaggg
+gbcKammFmgmommaLbcg
+fhijaammmgmmmaajklp
+qJtMaHammammaIawNty
+gzAaaaaaaaaaaaaaBCg
+gggaaaaaaaaaaaaaggg
+"}

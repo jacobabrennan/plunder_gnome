@@ -90,10 +90,9 @@ game
 
 // Show traffic when users join the game
 interface/characterSelect
-	New(client/newClient, character/newCharacter)
+	New(client/newClient, game/newGame)
 		. = ..()
-		var /game/G = game(character)
-		G.routeTraffic(newClient, "is now playing on the [newCharacter.team] team.")
+		newGame.routeTraffic(newClient, "[html_encode(newClient.key)] has joined the game.")
 
 // Add Game Chat to users spectating, selecting their character, or playing
 interface/characterSelect

@@ -177,9 +177,11 @@ critter
 placementMarker
 	parent_type = /obj
 	icon = 'markers.dmi'
+	layer = FLY_LAYER
 	var
 		team = TEAM_RED
 		position = 1
+	//
 	position_red_1
 		icon_state = "red_1"
 		team = TEAM_RED
@@ -192,6 +194,7 @@ placementMarker
 		icon_state = "red_3"
 		team = TEAM_RED
 		position = 3
+	//
 	position_blue_1
 		icon_state = "blue_1"
 		team = TEAM_BLUE
@@ -204,3 +207,55 @@ placementMarker
 		icon_state = "blue_3"
 		team = TEAM_BLUE
 		position = 3
+	//
+	position_green_1
+		icon_state = "green_1"
+		team = TEAM_GREEN
+		position = 1
+	position_green_2
+		icon_state = "green_2"
+		team = TEAM_GREEN
+		position = 2
+	position_green_3
+		icon_state = "green_3"
+		team = TEAM_GREEN
+		position = 3
+	//
+	position_yellow_1
+		icon_state = "yellow_1"
+		team = TEAM_YELLOW
+		position = 1
+	position_yellow_2
+		icon_state = "yellow_2"
+		team = TEAM_YELLOW
+		position = 2
+	position_yellow_3
+		icon_state = "yellow_3"
+		team = TEAM_YELLOW
+		position = 3
+	//
+	position_red_cpu
+		icon_state = "red_cpu"
+		team = TEAM_RED
+		position = "cpu"
+		pixel_x = 8
+		pixel_y = 8
+	position_blue_cpu
+		icon_state = "blue_cpu"
+		team = TEAM_BLUE
+		position = "cpu"
+		pixel_x = 8
+		pixel_y = 8
+	position_green_cpu
+		icon_state = "green_cpu"
+		team = TEAM_GREEN
+		position = "cpu"
+		pixel_x = 8
+		pixel_y = 8
+	position_yellow_cpu
+		icon_state = "yellow_cpu"
+		team = TEAM_YELLOW
+		position = "cpu"
+		pixel_x = 8
+		pixel_y = 8
+	//

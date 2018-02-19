@@ -11,14 +11,12 @@ client
 		. = ..()
 
 interface
-
 	//- Connection -----------------------------------
 	New(client/_client)
 		// don't do the default action: place interface inside of first argument
 		if(_client) client = _client
 	Login()
 		// don't do the default action: place interface at locate(1,1,1)
-		//if(lagoutTimer) del lagoutTimer
 		if(client.interface)
 			client.interface.disconnect(client)
 		client.interface = src
@@ -31,17 +29,7 @@ interface
 	//-- Invuluntary Disconnect Handling -------------
 	var/interface/lagoutTimer/lagoutTimer
 	Logout()
-	/*	del lagoutTimer
-		if(key)
-			lagoutTimer = new(src)
-		else*/
 		del src
-/*	lagoutTimer
-		parent_type = /datum
-		New(interface/lagInt)
-			spawn (TIME_LAG_DISCONNECT)
-				if(lagInt.lagoutTimer == src)
-					del lagInt*/
 
 	//-- Chat Channel Handling -----------------------
 	var
@@ -72,18 +60,25 @@ interface/clay
 interface/spectator
 	showGameChat = TRUE
 
-//-- Character Select ----------------------------
+
+//-- Round Setup ----------------------------------------------------------
+
 interface/characterSelect
 	showGameChat = TRUE
 	var
+		game/game
 		character/character
-	New(client/newClient, character/newCharacter)
+	New(client/newClient, game/newGame)
+		game = newGame
+		loc = locate(game.x, game.y, game.z)
 		. = ..()
-		attachCharacter(newCharacter)
-		var /game/newGame = game(character)
-		loc = locate(newGame.x, newGame.y, newGame.z)
 	proc
 		attachCharacter(newCharacter)
+			if(!character)
+				for(var/button/cpuButton in cpu)
+					client.screen.Add(cpuButton)
+				buttonLeave.screen_loc = "11:-4, 6:8"
+				client.screen.Add(buttonStart)
 			character = newCharacter
 			character.player = src
 			character.name = html_encode(key)
@@ -92,54 +87,102 @@ interface/characterSelect
 	var
 		interface/characterSelect/button/start/buttonStart
 		interface/characterSelect/button/leave/buttonLeave
+		list/toggle = new()
+		list/cpu = new()
 	verb
 		StartGame()
 			set name = "Start"
-			client.screen.Cut()
+			for(var/button/cutButton in cpu+toggle)
+				client.screen.Remove(cutButton)
+			client.screen.Remove(buttonStart, buttonLeave)
 			system.startGame()
+
 	Login()
 		. = ..()
 		buttonStart = new()
 		buttonLeave = new()
-		client.screen.Add(buttonStart, buttonLeave)
+		client.screen.Add(buttonLeave)
+		for(var/teamColor in game.teams)
+			var /placementMarker/teamPlacement = game.placements["[teamColor]_cpu"]
+			if(!teamPlacement) continue
+			//
+			var /interface/characterSelect/button/cpu/teamCPU = new()
+			teamCPU.team = teamColor
+			switch(teamColor)
+				if(TEAM_RED   ) teamCPU.color = list("#f00", "#fff", "#000")
+				if(TEAM_BLUE  ) teamCPU.color = list("#33f", "#fff", "#000")
+				if(TEAM_GREEN ) teamCPU.color = list("#6f0", "#fff", "#000")
+				if(TEAM_YELLOW) teamCPU.color = list("#fc0", "#fff", "#000")
+			var offset = (teamPlacement.x > world.maxx/2)? -3 : 1
+			teamCPU.screen_loc = "[teamPlacement.x+offset], [teamPlacement.y-1]"
+			cpu.Add(teamCPU)
+			//
+			var /interface/characterSelect/button/toggle/teamToggle = new()
+			teamToggle.team = teamColor
+			switch(teamColor)
+				if(TEAM_RED   ) teamToggle.color = list("#f00", "#fff", "#000")
+				if(TEAM_BLUE  ) teamToggle.color = list("#33f", "#fff", "#000")
+				if(TEAM_GREEN ) teamToggle.color = list("#6f0", "#fff", "#000")
+				if(TEAM_YELLOW) teamToggle.color = list("#fc0", "#fff", "#000")
+			teamToggle.screen_loc = "[teamPlacement.x-1], [teamPlacement.y-1]"
+			toggle.Add(teamToggle)
+			//
+			client.screen.Add(teamToggle)
+
 	Logout()
 		del buttonStart
 		del buttonLeave
+		for(var/button/loopButton in cpu+toggle)
+			del loopButton
 		. = ..()
 	button
-		parent_type = /obj
-		icon = 'gameplay_buttons.dmi'
-		bound_width  = 64
-		bound_height = 32
+		parent_type = /button
 		start
-			icon_state = "start_up"
+			displayName = "start"
 			screen_loc = "6:4, 6:8"
 			Click()
+				. = ..()
 				var /interface/characterSelect/gameInt = usr
 				if(!istype(gameInt)) return
-				icon_state = "start_down"
-				sleep(2)
-				icon_state = "start_up"
-				spawn(1)
-					gameInt.StartGame()
+				sleep(1)
+				gameInt.StartGame()
 		leave
-			icon_state = "leave_up"
-			screen_loc = "11:-4, 6:8"
+			displayName = "leave"
+			screen_loc = "9:-8, 6:8"
 			Click()
+				. = ..()
 				var /interface/characterSelect/gameInt = usr
 				if(!istype(gameInt)) return
-				icon_state = "leave_down"
-				sleep(2)
-				icon_state = "leave_up"
-				spawn(1)
-					new /interface/titleScreen(gameInt.client)
+				sleep(3)
+				new /interface/titleScreen(gameInt.client)
+		toggle
+			displayName = "add"
+			var
+				team
+			Click()
+				. = ..()
+				var /interface/characterSelect/gameInt = usr
+				if(!istype(gameInt)) return
+				gameInt.game.addCharacter(gameInt, team)
+		cpu
+			displayName = "cpu"
+			var
+				team
+			Click()
+				. = ..()
+				var /interface/characterSelect/gameInt = usr
+				if(!istype(gameInt)) return
+				gameInt.game.addCPU(team)
 
-//-- Gameplay - Control Character during game ----
+
+//-- Gameplay - Control Character during game -----------------------------
+
 interface/gameplay
 	showGameChat = TRUE
 	var
 		character/character
 	New(client/newClient, character/newCharacter)
+		return
 		. = ..()
 		attachCharacter(newCharacter)
 		var /game/newGame = game(character)
@@ -152,7 +195,8 @@ interface/gameplay
 		return client.macros.commands
 
 
-//-- Results - displays results of game ----------
+//-- Results - displays results of game -----------------------------------
+
 interface/results
 	showGameChat = TRUE
 	Login()

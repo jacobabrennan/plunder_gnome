@@ -20,6 +20,7 @@
 #include "code\02_system.dm"
 #include "code\03_junk.dm"
 #include "code\atomic_modification.dm"
+#include "code\button.dm"
 #include "code\character.dm"
 #include "code\game.dm"
 #include "code\intelligence.dm"
@@ -32,5 +33,6 @@
 #include "code\team.dm"
 #include "code\title_screen.dm"
 #include "code\utilities.dm"
+#include "maps\farm_4.dmm"
 #include "maps\title_screen.dmm"
 // END_INCLUDE

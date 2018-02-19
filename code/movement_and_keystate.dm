@@ -19,10 +19,10 @@ mover
 		adjustVelocity(deltaX, deltaY)
 			velocity.x += deltaX
 			velocity.y += deltaY
-			if(abs(velocity.x) >= max_vel)
-				velocity.x = max_vel * sign(velocity.x)
-			if(abs(velocity.y) >= max_vel)
-				velocity.y = max_vel * sign(velocity.y)
+			if(abs(velocity.x) > MAX_VELOCITY)
+				velocity.x = MAX_VELOCITY * sign(velocity.x)
+			if(abs(velocity.y) > MAX_VELOCITY)
+				velocity.y = MAX_VELOCITY * sign(velocity.y)
 		go(direction)
 			// Change run animation frame
 			if(direction)
@@ -38,17 +38,21 @@ mover
 			var acclY = 0
 			var newDir = 0
 			if(direction & NORTH)
-				acclY += accl
 				newDir |= NORTH
-			if(direction & SOUTH)
-				acclY -= accl
+				if(velocity.y < max_vel)
+					acclY += accl
+			else if(direction & SOUTH)
 				newDir |= SOUTH
+				if(velocity.y > -max_vel)
+					acclY -= accl
 			if(direction & EAST)
-				acclX += accl
 				newDir |= EAST
-			if(direction & WEST)
-				acclX -= accl
+				if(velocity.x < max_vel)
+					acclX += accl
+			else if(direction & WEST)
 				newDir |= WEST
+				if(velocity.x > -max_vel)
+					acclX -= accl
 			adjustVelocity(acclX, acclY)
 			dir = newDir
 

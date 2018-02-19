@@ -14,6 +14,7 @@ game
 		overtime = FALSE
 		//
 		list/teams = list()
+		list/selectionPlayers = list()
 		//
 		list/placements = new()
 		//
@@ -85,18 +86,30 @@ game
 				start = locate(start.x,start.y,start.z)
 			player.mob.loc = start
 
-		addPlayer(var/client/player, var/teamColor as text)
+		addPlayer(var/client/player)
 			// Spectate the player if the game has already been started.
 			if(started)
 				if(player)
 					player << output("There is currenly a game underway. You are now being added as a spectator.", "outputChannelGame")
 					addSpectator(player)
 				return
-			// Also spectate the player if the chosen team is invalid
+			var /interface/characterSelect/selectingPlayer = new(player, src)
+			selectionPlayers.Add(selectingPlayer)
+
+		addCPU(teamColor)
+			var success = addCharacter(null, teamColor)
+			if(success) return success
+			var /team/cpuTeam = teams[teamColor]
+			for(var/character/testChar in cpuTeam.players)
+				if(!istype(testChar.player, /character/rival)) continue
+				var rivalIndex = cpuTeam.players.Find(testChar)
+				cpuTeam.players.Cut(rivalIndex, rivalIndex+1)
+				del testChar
+
+		addCharacter(var/interface/characterSelect/player, var/teamColor as text)
+			// Cancel out if invalid team
 			var /team/chosenTeam = teams[teamColor]
 			if(!chosenTeam)
-				if(player)
-					addSpectator(player)
 				return
 			// Determine Player Index on Team
 			var /playerIndex = chosenTeam.players.len
@@ -125,12 +138,14 @@ game
 			if(player)
 				newChar = new /character/george(start)
 				newChar.setTeam(teamColor, playerIndex)
-				new /interface/characterSelect(player, newChar)
+				player.attachCharacter(newChar)
 			else
-				newChar = new /character/mathew(start)
+				var gnomeType = pick(/character/george, /character/mathew, /character/glen)
+				newChar = new gnomeType(start)
 				newChar.setTeam(teamColor, playerIndex)
 				new /character/rival(newChar)
 			chosenTeam.players.Add(newChar)
+			return TRUE
 
 		/*removePlayer(var/character/who)
 			var/list/team = teams[who.team]
@@ -151,7 +166,7 @@ game
 					while(theTeam.players.len < teamMax)
 						addPlayer(null, teamColor)
 			// Connect players to gameplay interfaces
-			for(var/interface/characterSelect/selectInt in src)
+			for(var/interface/characterSelect/selectInt in selectionPlayers)
 				new /interface/gameplay(selectInt.client, selectInt.character)
 			// Sprout radishes from random farms
 			for(var/tile/farm/containedFarm in src)
@@ -180,8 +195,8 @@ game
 				var newX = mover.step_x + mover.velocity.x
 				var newY = mover.step_y + mover.velocity.y
 				if(!mover.Move(mover.loc, mover.dir, newX, newY))
-					mover.Move(mover.loc, mover.dir, newX, mover.step_y)
-					mover.Move(mover.loc, mover.dir, mover.step_x, newY)
+					mover?.Move(mover.loc, mover.dir, newX, mover.step_y)
+					mover?.Move(mover.loc, mover.dir, mover.step_x, newY)
 			// Reduce velocity of all moving atoms based on friction
 				var totalFriction = 0
 				var totalTiles = 0

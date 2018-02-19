@@ -93,7 +93,7 @@ atom/movable
 //-- Position, Direction, & Distance -------------
 
 atom/movable/proc/directionTo(atom/movable/target)
-	// Determine the closest cardinal direction from src to target
+	// Determine the direction from src to target
 	var deltaX
 	var deltaY
 	if(istype(target))

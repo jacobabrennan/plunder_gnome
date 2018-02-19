@@ -1,4 +1,6 @@
 "a" = (/tile/bush{icon_state = "tree_waste"},/area)
+"b" = (/placementMarker/position_red_cpu,/tile/house{tag = "icon-front_top_right"; icon_state = "front_top_right"},/area)
+"c" = (/placementMarker/position_blue_cpu,/tile/house{tag = "icon-front_top_right"; icon_state = "front_top_right"},/area)
 "e" = (/tile/lawn,/area)
 "h" = (/tile/houseOverhang,/tile/lawn,/area)
 "i" = (/tile/houseOverhang{tag = "icon-roof_back_right"; icon_state = "roof_back_right"},/tile/lawn,/area)
@@ -7,7 +9,6 @@
 "l" = (/tile/house{tag = "icon-roof_front"; icon_state = "roof_front"; layer = 5},/area)
 "m" = (/tile/house{tag = "icon-roof_corner_left"; icon_state = "roof_corner_left"; layer = 5},/area)
 "n" = (/tile/house{tag = "icon-roof_right"; icon_state = "roof_right"; layer = 5},/area)
-"o" = (/tile/house{tag = "icon-front_top_right"; icon_state = "front_top_right"},/area)
 "p" = (/tile/house{tag = "icon-front_top_left"; icon_state = "front_top_left"},/area)
 "q" = (/tile/house{tag = "icon-shutters"; icon_state = "shutters"},/area)
 "r" = (/tile/house{tag = "icon-shutters2"; icon_state = "shutters2"},/area)
@@ -30,7 +31,7 @@ eeeeeeeaeeeaeeeeeee
 eeeeeyeeaeaeezeeeee
 eeehieeaeeeaeehieee
 eAejkleeaeaeelmneBe
-eeeopqeaeeeaeropeee
+eeebpqeaeeeaercpeee
 eeesqeaeaeaeaerteee
 eeeCeeeeeaeeeeeDeee
 eeeeeuuueaeuuueeeee

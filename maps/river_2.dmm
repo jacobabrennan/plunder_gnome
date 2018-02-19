@@ -1,6 +1,8 @@
-"a" = (/tile/bush,/tile/houseOverhang,/area)
-"b" = (/tile/bush,/tile/houseOverhang{icon_state = "roof_back_right"},/area)
+"a" = (/tile/houseOverhang,/tile/bush,/area)
+"b" = (/tile/houseOverhang{icon_state = "roof_back_right"},/tile/bush,/area)
 "c" = (/tile/water,/area)
+"d" = (/placementMarker/position_red_cpu,/tile/house{tag = "icon-shutters2"; icon_state = "shutters2"},/area)
+"e" = (/placementMarker/position_blue_cpu,/tile/house{tag = "icon-shutters2"; icon_state = "shutters2"},/area)
 "g" = (/tile/lawn,/area)
 "i" = (/tile/house{tag = "icon-roof_left"; icon_state = "roof_left"; layer = 5},/area)
 "j" = (/tile/house{tag = "icon-roof_right"; icon_state = "roof_right"; layer = 5},/area)
@@ -31,11 +33,11 @@
 
 (1,1,1) = {"
 kkkabkkkkkkkkkabkkk
-kkaijkrrrkrrrkijbkk
+kkaijkkkkkkkkkijbkk
 knopqgrrrkrrrgpqsnk
-ktptugrvrkrwrgtuquk
-kktxygrrrkrrrgzAukk
-kkgBgggggkgggggCgkk
+ktpdugrrrkrrrgeuquk
+kktxygrvrkrwrgzAukk
+kkgBggrrrkrrrggCgkk
 kkgDgggkkkkkgggDgkk
 gggDDDDDDDDDDDDDggg
 ggEgggggggggggggHgg
