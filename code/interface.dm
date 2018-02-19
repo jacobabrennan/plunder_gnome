@@ -73,15 +73,35 @@ interface/characterSelect
 		loc = locate(game.x, game.y, game.z)
 		. = ..()
 	proc
-		attachCharacter(newCharacter)
+		attachCharacter(character/newCharacter)
 			if(!character)
 				for(var/button/cpuButton in cpu)
 					client.screen.Add(cpuButton)
+				for(var/interface/characterSelect/button/toggle/toggleButton in toggle)
+					if(toggleButton.team == newCharacter.team)
+						toggleButton.displayName = "minus"
+						toggleButton.icon_state = "[toggleButton.team]_[toggleButton.displayName]"
+					else
+						client.screen.Remove(toggleButton)
 				buttonLeave.screen_loc = "11:-4, 6:8"
 				client.screen.Add(buttonStart)
 			character = newCharacter
 			character.player = src
 			character.name = html_encode(key)
+		detachCharacter()
+			if(!character) return
+			client.screen.Remove(buttonStart)
+			buttonLeave.screen_loc = initial(screen_loc)
+			for(var/button/cpuButton in cpu)
+				client.screen.Remove(cpuButton)
+			for(var/interface/characterSelect/button/toggle/toggleButton in toggle)
+				if(toggleButton.team == character.team)
+					toggleButton.displayName = "add"
+					toggleButton.icon_state = "[toggleButton.team]_[toggleButton.displayName]"
+				else
+					client.screen.Add(toggleButton)
+			game.removeCharacter(src)
+
 
 	//-- Buttons -------------------------------------
 	var
@@ -96,6 +116,10 @@ interface/characterSelect
 				client.screen.Remove(cutButton)
 			client.screen.Remove(buttonStart, buttonLeave)
 			system.startGame()
+		leave()
+			game.removePlayer(src)
+			new /interface/titleScreen(client)
+			del src
 
 	Login()
 		. = ..()
@@ -154,7 +178,7 @@ interface/characterSelect
 				var /interface/characterSelect/gameInt = usr
 				if(!istype(gameInt)) return
 				sleep(3)
-				new /interface/titleScreen(gameInt.client)
+				gameInt.leave()
 		toggle
 			displayName = "add"
 			var
@@ -163,7 +187,10 @@ interface/characterSelect
 				. = ..()
 				var /interface/characterSelect/gameInt = usr
 				if(!istype(gameInt)) return
-				gameInt.game.addCharacter(gameInt, team)
+				if(gameInt.character)
+					gameInt.detachCharacter()
+				else
+					gameInt.game.addCharacter(gameInt, team)
 		cpu
 			displayName = "cpu"
 			var
@@ -182,7 +209,6 @@ interface/gameplay
 	var
 		character/character
 	New(client/newClient, character/newCharacter)
-		return
 		. = ..()
 		attachCharacter(newCharacter)
 		var /game/newGame = game(character)

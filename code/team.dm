@@ -6,7 +6,7 @@ team
 	var
 		color
 		score = 0
-		list/players = new()
+		list/characters = new()
 		// Map Awareness
 		tile/goal/goal
 		list/farms = new()

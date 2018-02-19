@@ -6,6 +6,7 @@ intelligence
 	parent_type = /mob
 	proc
 		control(character/controlChar)
+		bounce(bouncer, bounceDir)
 
 interface
 	parent_type = /intelligence
@@ -20,6 +21,7 @@ character/rival
 		newChar.player = src
 		character = newChar
 		team = character.team
+		reactionQueue = new(character.reactionTime)
 	control(character/controlChar)
 		var commands = danger()
 		if(commands)
@@ -140,12 +142,14 @@ character/rival
 			// Get the opposite team's goal
 			if(!target)
 				var /team/ownTeam = ownGame.teams[team]
-				for(var/teamColor in ownGame.teams)
-					opponentTeam = ownGame.teams[teamColor]
-					if(opponentTeam == ownTeam || !opponentTeam.score)
-						opponentTeam = null
-						continue
-					break
+				var /list/teamsCopy = ownGame.teams.Copy()
+				teamsCopy.Remove(ownTeam.color)
+				while(teamsCopy.len)
+					var teamColor = pick(teamsCopy)
+					teamsCopy.Remove(teamColor)
+					var /team/testTeam = ownGame.teams[teamColor]
+					if(!opponentTeam || testTeam.score > opponentTeam.score)
+						opponentTeam = testTeam
 				if(!opponentTeam)
 					switchGoal("farm")
 					return
@@ -159,7 +163,10 @@ character/rival
 			return trackPath(target)
 
 	var
-		list/reactionQueue = new(7)
+		list/reactionQueue
+	bounce()
+		reactionQueue[1] = pick(NORTH, SOUTH, EAST, WEST)
+		. = ..()
 	proc
 		danger()
 			// Find the closest hostile target

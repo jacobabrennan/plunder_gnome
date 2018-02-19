@@ -9,6 +9,7 @@ character
 	var
 		strength = 1
 		capacity = 5
+		reactionTime = 12
 		// Nonconfigurable:
 		intelligence/player
 		team
@@ -95,6 +96,7 @@ character
 							invulnerable = FALSE
 
 		bounce(character/bouncer, bounceDir)
+			player.bounce(bouncer,bounceDir)
 			switch(bounceDir)
 				if(NORTH) velocity.y += 12
 				if(SOUTH) velocity.y -= 12
@@ -146,6 +148,7 @@ character
 		strength = 2
 		accl = 0.75
 		max_vel = 3
+		reactionTime = 4
 	george // Medium Gnome
 		icon = 'base_gnome.dmi'
 		bound_height = 14

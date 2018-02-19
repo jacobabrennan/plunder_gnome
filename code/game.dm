@@ -96,14 +96,21 @@ game
 			var /interface/characterSelect/selectingPlayer = new(player, src)
 			selectionPlayers.Add(selectingPlayer)
 
+		removePlayer(var/client/player)
+			var /interface/characterSelect/oldSelector = player
+			if(istype(oldSelector))
+				if(oldSelector.character)
+					removeCharacter(oldSelector)
+				selectionPlayers.Remove(oldSelector)
+
 		addCPU(teamColor)
 			var success = addCharacter(null, teamColor)
 			if(success) return success
 			var /team/cpuTeam = teams[teamColor]
-			for(var/character/testChar in cpuTeam.players)
+			for(var/character/testChar in cpuTeam.characters)
 				if(!istype(testChar.player, /character/rival)) continue
-				var rivalIndex = cpuTeam.players.Find(testChar)
-				cpuTeam.players.Cut(rivalIndex, rivalIndex+1)
+				var rivalIndex = cpuTeam.characters.Find(testChar)
+				cpuTeam.characters.Cut(rivalIndex, rivalIndex+1)
 				del testChar
 
 		addCharacter(var/interface/characterSelect/player, var/teamColor as text)
@@ -112,7 +119,7 @@ game
 			if(!chosenTeam)
 				return
 			// Determine Player Index on Team
-			var /playerIndex = chosenTeam.players.len
+			var /playerIndex = chosenTeam.characters.len
 			if(playerIndex >= 3)
 				if(player)
 					player << output("The [teamColor] team is full.", "outputChannelGame")
@@ -144,12 +151,14 @@ game
 				newChar = new gnomeType(start)
 				newChar.setTeam(teamColor, playerIndex)
 				new /character/rival(newChar)
-			chosenTeam.players.Add(newChar)
+			chosenTeam.characters.Add(newChar)
 			return TRUE
 
-		/*removePlayer(var/character/who)
-			var/list/team = teams[who.team]
-			team.Remove(who)*/
+		removeCharacter(interface/characterSelect/oldPlayer)
+			var teamColor = oldPlayer.character.team
+			var /team/leaveTeam = teams[teamColor]
+			leaveTeam.characters.Remove(oldPlayer.character)
+			del oldPlayer.character
 
 		start()
 			// Must return a TRUE value if start was successful.
@@ -157,14 +166,14 @@ game
 			if(started) return FALSE
 			// Complete teams by adding AI players
 			if(usr)
-				var teamMax = 0
+				//var teamMax = 0
+				/*for(var/teamColor in teams)
+					var /team/theTeam = teams[teamColor]
+					if(theTeam.players.len > teamMax) teamMax = theTeam.players.len*/
 				for(var/teamColor in teams)
 					var /team/theTeam = teams[teamColor]
-					if(theTeam.players.len > teamMax) teamMax = theTeam.players.len
-				for(var/teamColor in teams)
-					var /team/theTeam = teams[teamColor]
-					while(theTeam.players.len < teamMax)
-						addPlayer(null, teamColor)
+					while(theTeam.characters.len < 1)
+						addCharacter(null, teamColor)
 			// Connect players to gameplay interfaces
 			for(var/interface/characterSelect/selectInt in selectionPlayers)
 				new /interface/gameplay(selectInt.client, selectInt.character)
