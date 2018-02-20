@@ -1,18 +1,31 @@
-"aa" = (/turf{tag = "title_location"},/area)
-"dW" = (/turf,/area)
+"a" = (/tile,/area)
+"b" = (/tile/lawn,/area)
+"c" = (/tile/houseOverhang,/tile/lawn,/area)
+"d" = (/tile/houseOverhang{icon_state = "roof_back_right"},/tile/lawn,/area)
+"e" = (/tile/lawn,/tile/bush,/area)
+"f" = (/tile/house{icon_state = "roof_front"; layer = 5},/area)
+"g" = (/tile/house{icon_state = "roof_corner_left"; layer = 5},/area)
+"h" = (/tile/house{icon_state = "roof_right"; layer = 5},/area)
+"i" = (/tile/house{icon_state = "shutters2"},/area)
+"j" = (/tile/house{icon_state = "front_top_right"},/area)
+"k" = (/tile/house{icon_state = "front_top_left"},/area)
+"l" = (/tile/house{icon_state = "door"},/area)
+"m" = (/tile/house{icon_state = "shutters"},/area)
+"n" = (/tile/farm,/area)
+"q" = (/tile/lawn,/tile/path,/area)
 
 (1,1,1) = {"
-dWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdW
-dWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdW
-dWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdW
-dWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdW
-dWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdW
-dWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdW
-dWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdW
-dWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdW
-dWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdW
-dWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdW
-dWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdW
-dWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdW
-aadWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdWdW
+aaaaaaaaaaabbbbbbbb
+aaaaaaaaaabbbbbbbbb
+aaaaaaaaabbbbbbcdbb
+aaaaaaaaabbbbbfghbb
+aaaaaaaaabbbbbijkbb
+aaaaaaaaaeeeeeelmee
+aaaaaaaaannnnnnqbbb
+aaaaaaaaannnnnnqbbb
+aaaaaaaaannnnnnqbbb
+aaaaaaaaannnnnnqbbb
+aaaaaaaaannnnnnqbbb
+qqqqqqqqqqqqqqqqbbb
+aaaaaaaaaaaaaaaabab
 "}

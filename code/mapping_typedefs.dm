@@ -32,7 +32,7 @@ tile
 		proc
 			sprout()
 				if(!(locate(/radish) in src))
-					new /radish/farm(src)
+					return new /radish/farm(src)
 					/* Nudge for more random look
 					newGrowth.step_x += pick(-1, 0, 1)
 					newGrowth.step_y += pick(-1, 0, 1)*/
@@ -68,6 +68,7 @@ tile
 				if(!transactionChar.radishes)
 					return
 				game.adjustScore(team, transactionChar.radishes)
+				transactionChar.addStat("deliver", transactionChar.radishes)
 				transactionChar.adjustRadishes(-transactionChar.radishes)
 			// Plunder Radishes if teams don't match
 			else
@@ -75,6 +76,7 @@ tile
 				if(!ownTeam.score) return
 				if(transactionChar.plunderCoolDown) return
 				var award = transactionChar.adjustRadishes(1)
+				transactionChar.addStat("plunder", award)
 				if(!award) return
 				transactionChar.plunderCoolDown = DELAY_PLUNDER
 				game.adjustScore(team, -award)

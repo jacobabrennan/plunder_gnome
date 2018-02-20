@@ -9,6 +9,8 @@ radish
 	bound_width  = 6
 	bound_height = 6
 	movement = MOVEMENT_FLOOR
+	var
+		farmed = TRUE
 	Crossed(character/crosser)
 		. = ..()
 		if(istype(crosser))
@@ -26,6 +28,8 @@ radish
 			new /radish/animation(src)
 			// Adjust getChar radishes and delete self
 			getChar.adjustRadishes(1)
+			if(farmed)
+				getChar.addStat("farm", 1)
 			del src
 
 	animation
@@ -77,6 +81,7 @@ radish
 		icon_state = "radish_spill"
 		pixel_x = -2
 		pixel_y = -2
+		farmed = FALSE
 		New()
 			.=..()
 			dir = pick(NORTH,NORTHEAST,WEST,SOUTHEAST,SOUTH,NORTHWEST,EAST,SOUTHWEST)

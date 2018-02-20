@@ -33,6 +33,5 @@
 #include "code\team.dm"
 #include "code\title_screen.dm"
 #include "code\utilities.dm"
-#include "maps\farm_4.dmm"
 #include "maps\title_screen.dmm"
 // END_INCLUDE

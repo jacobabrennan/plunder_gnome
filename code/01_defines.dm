@@ -17,6 +17,7 @@ Player - A human or AI controller character instance in a game instance
 #define TEAM_GREEN "green"
 #define TEAM_YELLOW "yellow"
 
+
 //-- Gameplay Metrics ----------------------------------------------------------
 
 #define PRIMARY 1
@@ -29,6 +30,12 @@ Player - A human or AI controller character instance in a game instance
 #define TIME_INVULNERABLE 20
 	// How long a player is invulnerable after being stunned
 #define MAX_VELOCITY 6
+
+
+//-- Display Metrics -----------------------------------------------------------
+
+#define PLANE_BUTTON 2
+
 
 //-- Mapping System ------------------------------------------------------------
 

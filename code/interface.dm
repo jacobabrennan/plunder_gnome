@@ -12,9 +12,13 @@ client
 
 interface
 	//- Connection -----------------------------------
+	var
+		switching
 	New(client/_client)
 		// don't do the default action: place interface inside of first argument
-		if(_client) client = _client
+		if(_client)
+			if(_client.interface) _client.interface.switching = TRUE
+			client = _client
 	Login()
 		// don't do the default action: place interface at locate(1,1,1)
 		if(client.interface)
@@ -58,13 +62,16 @@ interface/clay
 
 //-- Spectator - Watches Gameplay ----------------
 interface/spectator
-	showGameChat = TRUE
+	//showGameChat = TRUE
+	New(client/newClient, game/newGame)
+		. = ..()
+		loc = locate(newGame.x, newGame.y, newGame.z)
 
 
 //-- Round Setup ----------------------------------------------------------
 
 interface/characterSelect
-	showGameChat = TRUE
+	//showGameChat = TRUE
 	var
 		game/game
 		character/character
@@ -72,22 +79,31 @@ interface/characterSelect
 		game = newGame
 		loc = locate(game.x, game.y, game.z)
 		. = ..()
+	attachCharacter(character/newCharacter)
+		// Change out buttons
+		if(!character)
+			for(var/button/cpuButton in cpu)
+				client.screen.Add(cpuButton)
+			for(var/interface/characterSelect/button/toggle/toggleButton in toggle)
+				if(toggleButton.team == newCharacter.team)
+					toggleButton.displayName = "minus"
+					toggleButton.icon_state = "[toggleButton.team]_[toggleButton.displayName]"
+				else
+					client.screen.Remove(toggleButton)
+			buttonLeave.screen_loc = "11:-4, 6:8"
+			client.screen.Add(buttonStart)
+		// Attach new character
+		character = newCharacter
+		character.player = src
+		character.name = html_encode(key)
+		// Apply Marker
+		spawn(1)
+			var /image/marker = image('player_marker.dmi', character, "marker", OBJ_LAYER)
+			marker.pixel_x = -4
+			marker.pixel_y = -5
+			marker.alpha = 128
+			client << marker
 	proc
-		attachCharacter(character/newCharacter)
-			if(!character)
-				for(var/button/cpuButton in cpu)
-					client.screen.Add(cpuButton)
-				for(var/interface/characterSelect/button/toggle/toggleButton in toggle)
-					if(toggleButton.team == newCharacter.team)
-						toggleButton.displayName = "minus"
-						toggleButton.icon_state = "[toggleButton.team]_[toggleButton.displayName]"
-					else
-						client.screen.Remove(toggleButton)
-				buttonLeave.screen_loc = "11:-4, 6:8"
-				client.screen.Add(buttonStart)
-			character = newCharacter
-			character.player = src
-			character.name = html_encode(key)
 		detachCharacter()
 			if(!character) return
 			client.screen.Remove(buttonStart)
@@ -118,7 +134,7 @@ interface/characterSelect
 			system.startGame()
 		leave()
 			game.removePlayer(src)
-			new /interface/titleScreen(client)
+			system.titleScreen.addPlayer(client)
 			del src
 
 	Login()
@@ -138,7 +154,7 @@ interface/characterSelect
 				if(TEAM_GREEN ) teamCPU.color = list("#6f0", "#fff", "#000")
 				if(TEAM_YELLOW) teamCPU.color = list("#fc0", "#fff", "#000")
 			var offset = (teamPlacement.x > world.maxx/2)? -3 : 1
-			teamCPU.screen_loc = "[teamPlacement.x+offset], [teamPlacement.y-1]"
+			teamCPU.screen_loc = "[teamPlacement.x+offset], [teamPlacement.y]"
 			cpu.Add(teamCPU)
 			//
 			var /interface/characterSelect/button/toggle/teamToggle = new()
@@ -148,7 +164,7 @@ interface/characterSelect
 				if(TEAM_BLUE  ) teamToggle.color = list("#33f", "#fff", "#000")
 				if(TEAM_GREEN ) teamToggle.color = list("#6f0", "#fff", "#000")
 				if(TEAM_YELLOW) teamToggle.color = list("#fc0", "#fff", "#000")
-			teamToggle.screen_loc = "[teamPlacement.x-1], [teamPlacement.y-1]"
+			teamToggle.screen_loc = "[teamPlacement.x-1], [teamPlacement.y]"
 			toggle.Add(teamToggle)
 			//
 			client.screen.Add(teamToggle)
@@ -158,7 +174,10 @@ interface/characterSelect
 		del buttonLeave
 		for(var/button/loopButton in cpu+toggle)
 			del loopButton
+		if(!switching)
+			leave()
 		. = ..()
+
 	button
 		parent_type = /button
 		start
@@ -201,11 +220,21 @@ interface/characterSelect
 				if(!istype(gameInt)) return
 				gameInt.game.addCPU(team)
 
+//-- Change Character ----------------------------
+character/Click()
+	. = ..()
+	var /interface/characterSelect/clickUser = usr
+	if(!istype(clickUser)) return
+	if(istype(player, /interface/characterSelect) && player != clickUser) return
+	var /game/ownGame = game(src)
+	ASSERT(player)
+	ownGame.changeCharacter(player)
+
 
 //-- Gameplay - Control Character during game -----------------------------
 
 interface/gameplay
-	showGameChat = TRUE
+	//showGameChat = TRUE
 	var
 		character/character
 	New(client/newClient, character/newCharacter)
@@ -213,19 +242,9 @@ interface/gameplay
 		attachCharacter(newCharacter)
 		var /game/newGame = game(character)
 		loc = locate(newGame.x, newGame.y, newGame.z)
-	proc
-		attachCharacter(newCharacter)
-			character = newCharacter
-			character.player = src
+
+	attachCharacter(newCharacter)
+		character = newCharacter
+		character.player = src
 	control(character/controlChar)
 		return client.macros.commands
-
-
-//-- Results - displays results of game -----------------------------------
-
-interface/results
-	showGameChat = TRUE
-	Login()
-		. = ..()
-		spawn(10)
-			new /interface/clay(client)

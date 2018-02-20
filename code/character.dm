@@ -17,19 +17,36 @@ character
 		stunned = FALSE
 		invulnerable = FALSE
 		plunderCoolDown = 0
+		position
+		// Stats
+		statDeliver = 0
+		statFarm = 0
+		statPlunder = 0
+		statDisrupt = 0
+		statStun = 0
+		statScore = 0
 	behavior()
 		if(plunderCoolDown) plunderCoolDown--
 		if(player)
 			var commands = player.control(src)
 			var direction = (NORTH|SOUTH|EAST|WEST) & commands
 			go(direction)
+	proc
+		addStat(stat, amount)
+			switch(stat)
+				if("deliver") statDeliver += amount
+				if("farm") statFarm += amount
+				if("plunder") statPlunder += amount
+				if("disrupt") statDisrupt += amount
+				if("stun") statStun += amount
 
 
 	//-- Team Setup ----------------------------------
 	proc
-		setTeam(newTeam, position)
+		setTeam(newTeam, newPosition)
 			// Set Team
 			team = newTeam
+			position = newPosition
 			// Color Icon
 			var /icon/I = icon(icon)
 			var newColorBrightness
@@ -69,9 +86,11 @@ character
 					if(EAST ) velocity.x += 4
 					if(WEST ) velocity.x -= 4
 			// Show stunned graphic
+			C.addStat("stun", 1)
 			stunned = TRUE
 			icon_state = "stunned"
 			// Spill all collected Radishes
+			C.addStat("disrupt", radishes)
 			for(var/I = 1 to radishes)
 				var /radish/spilled/r = new(loc)
 				r.centerLoc(src)
@@ -146,9 +165,8 @@ character
 		bound_x = 3
 		capacity = 2
 		strength = 2
-		accl = 0.75
+		accl = 1
 		max_vel = 3
-		reactionTime = 4
 	george // Medium Gnome
 		icon = 'base_gnome.dmi'
 		bound_height = 14
@@ -156,7 +174,7 @@ character
 		bound_x = 2
 		capacity = 5
 		strength = 4
-		accl = 0.75
+		accl = 1
 		max_vel = 2
 	glen // Strong Gnome
 		icon = 'strong_gnome.dmi'
@@ -166,3 +184,4 @@ character
 		strength = 6
 		accl = 1
 		max_vel = 1
+		reactionTime = 4

@@ -324,7 +324,6 @@ path
 		findType(datum/testDatum)
 			if(locate(finishedGoal) in testDatum) return P_DIJKSTRA_FINISHED
 			if(finishedGoal == testDatum) return P_DIJKSTRA_FINISHED
-			diag(testDatum)
 			return P_DIJKSTRA_NOT_FOUND
 
 

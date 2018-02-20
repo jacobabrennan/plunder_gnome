@@ -14,8 +14,9 @@
 "n" = (/tile/lawn,/tile/house{tag = "icon-roof_corner_right"; icon_state = "roof_corner_right"},/area)
 "o" = (/tile/houseOverhang{icon_state = "roof_front"; tag = ""},/tile/lawn,/area)
 "p" = (/placementMarker/position_red_3,/tile/lawn,/area)
-"q" = (/tile/lawn,/placementMarker/position_blue_cpu,/tile/house{tag = "icon-front_top_right"; icon_state = "front_top_right"},/area)
+"q" = (/tile/lawn,/tile/house{tag = "icon-front_top_right"; icon_state = "front_top_right"},/area)
 "r" = (/tile/lawn,/tile/house{tag = "icon-shutters2"; icon_state = "shutters2"},/area)
+"s" = (/placementMarker/position_blue_cpu{step_x = 0; step_y = 0},/tile/house{tag = "icon-shutters2"; icon_state = "shutters2"},/area)
 "t" = (/tile/lawn,/tile/house{tag = "icon-front_top_left"; icon_state = "front_top_left"},/area)
 "u" = (/tile/goal{tag = "red_goal"; icon_state = "door"; team = "red"},/area)
 "v" = (/tile/lawn{tag = "icon-water_nw"; icon_state = "water_nw"},/area)
@@ -34,7 +35,6 @@
 "I" = (/tile/house{tag = "icon-roof_corner_left"; icon_state = "roof_corner_left"},/area)
 "J" = (/tile/house{tag = "icon-roof_corner_right"; icon_state = "roof_corner_right"},/area)
 "L" = (/tile/house{tag = "icon-shutters"; icon_state = "shutters"},/area)
-"P" = (/tile/house{tag = "icon-shutters2"; icon_state = "shutters2"},/area)
 "Q" = (/tile/house{tag = "icon-siding2"; icon_state = "siding2"},/area)
 "U" = (/placementMarker/position_blue_3,/tile/lawn,/area)
 
@@ -50,6 +50,6 @@ aCCCEChvBwhhhhhhhha
 hCCCCCvjBhhhhhhhFca
 hhhvGvjjBhhhhhHoIJk
 vGvjjjjwhhhhhhhiqtL
-jjjjjjfhhUhhhhhhPQa
+jjjjjjfhhUhhhhhhsQa
 jjjjjfeahhhhhaaaaaa
 "}

@@ -22,25 +22,19 @@ system
 /*-- Feature List --------------------------------------------------------------
 
 Focus - Things which must be done this version
-	AI
+	Other characters besides men.
 
 Upcomming - Feature candidates for the next version
-	Select other characters (moles, etc)
-		With differing weights and speeds
-	Find old source with other maps & critters
-	Show Plunder Effects
-	map selection
+	Sounds
 
 Set In Stone - Features that have to be finished for 3.0
-	On screen "3, 2, 1, GO!"
 
 Spectulative - Ideas for new features to make the game better.
-	radishes visibly "grow" from the ground
-	4 teams at once
-	Title screen AI Gnome who farms continuously
-	Mercy Rule - Auto win if one side has X more points.
 
 Deferred - Low Priority Optional Features
+	Plunder Effects
+	Map Selection
+
 
 
 //------------------------------------------------------------------------------

@@ -5,6 +5,7 @@
 intelligence
 	parent_type = /mob
 	proc
+		attachCharacter()
 		control(character/controlChar)
 		bounce(bouncer, bounceDir)
 
@@ -18,6 +19,10 @@ character/rival
 		team
 	New(character/newChar)
 		. = ..()
+		attachCharacter(newChar)
+	Del()
+		// it's a mystery
+	attachCharacter(character/newChar)
 		newChar.player = src
 		character = newChar
 		team = character.team
@@ -73,7 +78,6 @@ character/rival
 		switchGoal(newGoal)
 			//for(var/tile/T in pathStorage)
 			//	T.color = null
-			//diag(newGoal)
 			target = null
 			path = null
 			dominantGoal = newGoal
@@ -112,9 +116,11 @@ character/rival
 				var /tile/farm/ownFarm = pick(ownTeam.farms)
 				if(locate(/radish) in obounds(ownFarm, TILE_SIZE*2))
 					switchGoal("farm")
+					return
 			// Otherwise, go raiding
 				else
 					switchGoal("plunder")
+					return
 			// If no Path, get path
 			if(!path && target && !(target in locs))
 				getPath(target)
@@ -170,7 +176,7 @@ character/rival
 	proc
 		danger()
 			// Find the closest hostile target
-			var /list/closeList = obounds(character, 16)
+			var /list/closeList = obounds(character, TILE_SIZE*2)
 			var /character/closeTarget
 			var closeDist = 99999
 			var /character/testTarget

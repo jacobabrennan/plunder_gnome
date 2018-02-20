@@ -31,6 +31,7 @@ window "channelGame"
 		size = 510x393
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		saved-params = "pos;size;is-minimized;is-maximized"
 		title = "Game Chat"
 		titlebar = false
@@ -71,6 +72,7 @@ window "channelSystem"
 		size = 510x393
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		saved-params = "pos;size;is-minimized;is-maximized"
 		title = "Server Chat"
 		titlebar = false
@@ -89,6 +91,7 @@ window "channelSystem"
 		font-family = "Georgia"
 		text-color = #ffffff
 		background-color = #331900
+		is-default = true
 		border = line
 		saved-params = ""
 		command = "saySystem"

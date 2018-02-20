@@ -26,6 +26,14 @@ client
 
 //-- Social Systems - Chat & Traffic -------------------------------------------
 
+client
+	New()
+		. = ..()
+		winset(src, "chatSystem", "focus=true")
+	Click()
+		. = ..()
+		winset(src, "chatSystem", "focus=true")
+
 //-- System Chat & Traffic -----------------------
 system
 	proc
@@ -37,7 +45,12 @@ system
 			what = copytext(what, 1, 400)
 			if(!length(what)) return
 			// Construct & Output message
-			world << {"<b style="color:#fff">[sanitizedName]</b>: <span style="color:#fc9">[what]</span>"}
+			what = {"<b style="color:#fff">[sanitizedName]</b>: <span style="color:#fc9">[what]</span>"}
+			var /interface/gameplay/player = who.interface
+			if(istype(player))
+				var iconText = {"<img class="icon" src="\ref[player.character.icon]" iconstate="1" icondir="4">"}
+				what = "[iconText] [what]"
+			world << what
 		routeTraffic(client/who, message)
 			// Sanitize user name and message
 			var sanitizedName = html_encode(who.key)

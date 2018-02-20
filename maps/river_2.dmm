@@ -24,10 +24,8 @@
 "B" = (/placementMarker/position_red_1,/tile/path,/area)
 "C" = (/placementMarker/position_blue_1,/tile/path,/area)
 "D" = (/tile/path,/area)
-"E" = (/critter/salty{dir = 4},/tile/lawn,/area)
 "F" = (/placementMarker/position_red_3,/tile/lawn,/area)
 "G" = (/placementMarker/position_blue_3,/tile/lawn,/area)
-"H" = (/critter/salty{dir = 8},/tile/lawn,/area)
 "I" = (/tile/lawn{tag = "icon-water_ne"; icon_state = "water_ne"},/area)
 "J" = (/tile/lawn{tag = "icon-water_nw"; icon_state = "water_nw"},/area)
 
@@ -40,7 +38,7 @@ kktxygrvrkrwrgzAukk
 kkgBggrrrkrrrggCgkk
 kkgDgggkkkkkgggDgkk
 gggDDDDDDDDDDDDDggg
-ggEgggggggggggggHgg
+ggggggggggggggggggg
 IggggggFgggGggggggJ
 cIJIgggggggggggJIJc
 ccccIJIJIgJIJIJcccc

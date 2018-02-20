@@ -27,14 +27,17 @@ system
 	var
 		_ready = FALSE
 		list/_waitingClients = new() // When the world boots, clients are put in here until the system is ready.
+		titleScreen/titleScreen
 	proc
 		startProject()
 			diag("<b>----- System Starting -----</b>")
 			loadVersion()
 			loadHub()
 			nextGame = newGame()
-			_ready = TRUE
+			diag("<b>----- Loading Title -----</b>")
+			titleScreen = new()
 			diag("<b>----- System Ready -----</b>")
+			_ready = TRUE
 			for(var/client/C in _waitingClients)
 				registerPlayer(C)
 		loadHub()
@@ -140,7 +143,7 @@ system
 				return
 			// Check games in progress for disconnected player?
 			// Send player to title screen
-			new /interface/titleScreen(client)
+			titleScreen.addPlayer(client)
 
 	//-- Map Manager ---------------------------------
 	var
@@ -148,11 +151,11 @@ system
 	mapManager
 		parent_type = /dmm_suite
 		var/list/gameMaps = list(
-			'maps/farm_4.dmm',/*
+			'maps/farm_4.dmm',
 			'maps/farm_double.dmm',
 			'maps/farm_double.dmm',
 			'maps/farm_double.dmm',
-			'maps/farm_bubble.dmm',
+			//'maps/farm_bubble.dmm',
 
 			'maps/snow_slide.dmm',
 
@@ -160,12 +163,14 @@ system
 			'maps/river_1.dmm',
 
 			'maps/river_2.dmm',
-			'maps/river_2.dmm',*/
+			'maps/river_2.dmm',
 		)
 		proc
-			loadMap(game/gameArea)
+			loadMap(game/gameArea, mapFile)
 				// Load atomic map objects from file
-				load_map(pick(gameMaps), gameArea.zPosition)
+				if(!mapFile)
+					mapFile = pick(gameMaps)
+				load_map(mapFile, gameArea.zPosition)
 				// Add all map objects to the game area
 				gameArea.contents.Add(block(
 					locate(         1,          1, gameArea.zPosition),

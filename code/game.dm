@@ -15,11 +15,15 @@ game
 		//
 		list/teams = list()
 		list/selectionPlayers = list()
+		list/resultPlayers = list()
 		//
 		list/placements = new()
 		//
 		game/hud/timer/timer
 		list/scoreDisplays = new()
+	Del()
+		diag("Deleint")
+		. = ..()
 	proc
 		setup()
 			// Setup Teams
@@ -43,12 +47,6 @@ game
 				var /team/assignedTeam = assignTeam(housePart)
 				if(assignedTeam)
 					housePart.color = list("#fa5", "#fa5", assignedTeam.color)
-			// Create timer
-			timer = new(src)
-			// Create team score displays
-			for(var/teamColor in teams)
-				var /game/hud/score/teamScore = new(src, teamColor)
-				scoreDisplays[teamColor] = teamScore
 			// Configure placement markers
 			for(var/placementMarker/marker in contents)
 				var positionId = "[marker.team]_[marker.position]"
@@ -79,14 +77,14 @@ game
 			var /game/hud/score/scoreDisplay = scoreDisplays[team]
 			scoreDisplay.refresh(scoreTeam.score)
 
-		addSpectator(var/client/player)
+		addSpectator(client/player)
 			// Find tag "spectator_start" and place client's mob there.
 			var /atom/start = locate("spectator_start")
 			if(!isturf(start))
 				start = locate(start.x,start.y,start.z)
 			player.mob.loc = start
 
-		addPlayer(var/client/player)
+		addPlayer(client/player)
 			// Spectate the player if the game has already been started.
 			if(started)
 				if(player)
@@ -96,8 +94,7 @@ game
 			var /interface/characterSelect/selectingPlayer = new(player, src)
 			selectionPlayers.Add(selectingPlayer)
 
-		removePlayer(var/client/player)
-			var /interface/characterSelect/oldSelector = player
+		removePlayer(interface/characterSelect/oldSelector)
 			if(istype(oldSelector))
 				if(oldSelector.character)
 					removeCharacter(oldSelector)
@@ -113,7 +110,7 @@ game
 				cpuTeam.characters.Cut(rivalIndex, rivalIndex+1)
 				del testChar
 
-		addCharacter(var/interface/characterSelect/player, var/teamColor as text)
+		addCharacter(interface/characterSelect/player, teamColor as text)
 			// Cancel out if invalid team
 			var /team/chosenTeam = teams[teamColor]
 			if(!chosenTeam)
@@ -160,10 +157,38 @@ game
 			leaveTeam.characters.Remove(oldPlayer.character)
 			del oldPlayer.character
 
+		changeCharacter(interface/characterSelect/oldPlayer)
+			var /character/oldCharacter = oldPlayer.character
+			var teamColor = oldCharacter.team
+			var /team/changeTeam = teams[teamColor]
+			changeTeam.characters.Remove(oldCharacter)
+			//
+			var newType
+			switch(oldCharacter.type)
+				if(/character/george)
+					newType = /character/mathew
+				if(/character/mathew)
+					newType = /character/glen
+				if(/character/glen)
+					newType = /character/george
+			var /character/newCharacter = new newType()
+			//
+			newCharacter.setTeam(oldCharacter.team, oldCharacter.position)
+			oldPlayer.attachCharacter(newCharacter)
+			changeTeam.characters.Add(newCharacter)
+			newCharacter.loc = oldCharacter.loc
+			del oldCharacter
+
 		start()
 			// Must return a TRUE value if start was successful.
 			// Cancel out if the game is already under way
 			if(started) return FALSE
+			// Create timer
+			timer = new(src)
+			// Create team score displays
+			for(var/teamColor in teams)
+				var /game/hud/score/teamScore = new(src, teamColor)
+				scoreDisplays[teamColor] = teamScore
 			// Complete teams by adding AI players
 			if(usr)
 				//var teamMax = 0
@@ -174,24 +199,46 @@ game
 					var /team/theTeam = teams[teamColor]
 					while(theTeam.characters.len < 1)
 						addCharacter(null, teamColor)
-			// Connect players to gameplay interfaces
+			// Connect players to gameplay or spectator interfaces
 			for(var/interface/characterSelect/selectInt in selectionPlayers)
-				new /interface/gameplay(selectInt.client, selectInt.character)
+				if(selectInt.character)
+					new /interface/gameplay(selectInt.client, selectInt.character)
+				else
+					new /interface/spectator(selectInt.client, src)
 			// Sprout radishes from random farms
 			for(var/tile/farm/containedFarm in src)
 				if(rand(1,8) == 8)
 					containedFarm.sprout()
 			// Start Countdown to actual gameplay
 			started = TRUE
+			var /obj/animation = new(locate(9, 6, z))
+			animation.pixel_x = -8
+			animation.pixel_y = -8
+			animation.icon = 'count_down.dmi'
+			animation.layer = FLY_LAYER
+			animation.appearance_flags |= PIXEL_SCALE
+			var zoom = 3
 			spawn()
-				hear("<h1>Starting in 3</h1>")
-				//sleep(10)
-				hear("<h1> -- 2</h1>")
-				//sleep(10)
-				hear("<h1> -- 1</h1>")
-				//sleep(10)
-				hear("<h1>GO!</h1>")
+				animation.icon_state = "3"
+				animate(animation, transform=matrix(zoom,0,0, 0,zoom,0), alpha=0, time=5)
+				sleep(10)
+				animation.icon_state = "2"
+				animation.transform = null
+				animation.alpha = 255
+				animate(animation, transform=matrix(zoom,0,0, 0,zoom,0), alpha=0, time=5)
+				sleep(10)
+				animation.icon_state = "1"
+				animation.transform = null
+				animation.alpha = 255
+				animate(animation, transform=matrix(zoom,0,0, 0,zoom,0), alpha=0, time=5)
+				sleep(10)
+				animation.icon_state = "go"
+				animation.transform = null
+				animation.alpha = 255
+				animate(animation, transform=matrix(zoom,0,0, 0,zoom,0), alpha=0, time=5)
 				main()
+				spawn(10)
+					del animation
 			// Signal a successful start
 			return TRUE
 
@@ -253,30 +300,129 @@ game
 					doubt = TRUE
 			// Handle situations with a clear winner
 			if(!doubt)
-				hear({"\
+				/*hear({"\
 					<h2 style="color:[highScoreTeam.color]">\
 					[uppertext(highScoreTeam.color)] has won with a score of [highScoreTeam.score]!\
 					</h2>\
-					"})
-				showResults()
-				system.delGame(gameId)
+					"})*/
+				showResults(highScoreTeam.color)
 				return
 			// Extend time when teams have scored the same points (overtime)
 			if(!overtime)
 				overtime = TRUE
 				time = 150
-				hear("<h2>Overtime!</h2>")
+				var /obj/animation = new(locate(9, 6, z))
+				animation.pixel_x = -8
+				animation.pixel_y = -8
+				animation.icon = 'count_down.dmi'
+				animation.layer = FLY_LAYER
+				animation.appearance_flags |= PIXEL_SCALE
+				var zoom = 3
+				spawn()
+					animation.icon_state = "overtime"
+					animate(animation, transform=matrix(zoom,0,0, 0,zoom,0), alpha=0, time=5)
+					sleep(10)
+					del animation
 				spawn(1)
 					main()
 			// Declare a draw when teams have the same scores after overtime
 			else
 				hear("<h2>The Game is a Draw.</h2>")
 				showResults()
-				system.delGame(gameId)
 
-		showResults()
+		showResults(winningColor)
+			//
+			for(var/teamColor in scoreDisplays)
+				var /game/hud/score/scoreDisplay = scoreDisplays[teamColor]
+				del scoreDisplay
+			del timer
+			//
+			sleep(5)
+			var /obj/teamWin = new(locate(6, 11, z))
+			teamWin.icon = 'win_displays.dmi'
+			teamWin.icon_state = winningColor || "tied"
+			teamWin.plane = 2
+			teamWin.pixel_x = -128
+			teamWin.pixel_y = 8
+			animate(teamWin, pixel_x = -TILE_SIZE, time = 10, easing = BACK_EASING)
+			//
+			var /obj/plane = new(locate(1, 1, z))
+			plane.plane = 0
+			plane.appearance_flags = PLANE_MASTER
+			animate(plane, color=list("#322","#232","#223"), time=10)
+			// Find all characters and animate them
+			var /list/resultCharacters = list()
+			for(var/teamColor in teams)
+				var /team/T = teams[teamColor]
+				for(var/character/C in T.characters)
+					resultCharacters.Add(C)
+					C.plane = 2
+					C.appearance_flags |= PIXEL_SCALE
+					C.statScore = T.score
+			var lineupY = 9*TILE_SIZE
+			var lineupX = 9*TILE_SIZE
+			for(var/character/C in resultCharacters)
+				C.overlays.Remove(C.radishMeter)
+				var deltaX = round(lineupX - (C.step_x + (C.x-1)*TILE_SIZE))
+				var deltaY = round(lineupY - (C.step_y + (C.y-1)*TILE_SIZE))
+				animate(C, pixel_x = deltaX, pixel_y = deltaY, time = 7, easing=BACK_EASING)
+			sleep(7)
+			//
+			//lineupX = (resultCharacters.len * (TILE_SIZE+1/2) - (TILE_SIZE/2))/2
+			var totalOffset = (resultCharacters.len * (1.20*TILE_SIZE))/2 - TILE_SIZE*2
+			for(var/charIndex = 1 to resultCharacters.len)
+				var /character/C = resultCharacters[charIndex]
+				var offset = round((charIndex-1) * (1.25*TILE_SIZE) - totalOffset + 4)
+				C.dir = WEST
+				C.stunned = FALSE
+				animate(C, transform = matrix(1,0,offset, 0,1,0), time = 7, easing = BACK_EASING)
+			//
+			var /list/stats = list("Score", "Deliver", "Farm", "Plunder", "Disrupt", "Stun")
+			for(var/statIndex = 1 to stats.len)
+				sleep(10)
+				var stat = stats[statIndex]
+				var statName = "stat[stat]"
+				var /obj/statObj = new(locate(6, 10-statIndex, z))
+				statObj.pixel_x -= totalOffset
+				statObj.icon = 'count_down.dmi'
+				statObj.icon_state = statName
+				statObj.plane = 2
+				for(var/character/C in resultCharacters)
+					var statValue = C.vars[statName]
+					var /obj/gnomeStat = new()
+					gnomeStat.plane = 2
+					gnomeStat.centerLoc(C)
+					gnomeStat.transform = C.transform
+					gnomeStat.pixel_x = C.pixel_x
+					gnomeStat.y = statObj.y
+					gnomeStat.pixel_y = statObj.pixel_y
+					gnomeStat.step_y = 0
+					gnomeStat.icon = 'digits.dmi'
+					gnomeStat.appearance_flags = KEEP_TOGETHER|PIXEL_SCALE
+					var digitString = "[statValue]"
+					if(!statValue)
+						digitString = "-"
+					var digits = length(digitString)
+					for(var/digitIndex = 1 to digits)
+						var digitChar = copytext(digitString, digits+1-digitIndex, digits+2-digitIndex)
+						var /image/digitOverlay = image('digits.dmi', gnomeStat, digitChar, FLY_LAYER)
+						digitOverlay.plane = 2
+						digitOverlay.pixel_x += -(digitIndex-2)*6 + 4
+						gnomeStat.overlays.Add(digitOverlay)
+			sleep(10)
+			//
+			var /list/doneButtons = new()
 			for(var/interface/player in contents)
-				new /interface/results(player.client)
+				var /button/resultsDone/done = new()
+				player.client.screen.Add(done)
+				doneButtons.Add(done)
+			//
+			sleep(600)
+			for(var/button/done in doneButtons)
+				del done
+			for(var/interface/player in contents)
+				system.titleScreen.addPlayer(player.client)
+			system.delGame(src)
 
 
 //-- HUD - Heads Up Display system for Time & Scores ---------------------------
@@ -298,16 +444,22 @@ game/hud/score
 	parent_type = /datum
 	var
 		list/digits = new(3)
+		game/hud/sprite/background
 		team
 	New(game/newGame, teamColor)
 		team = teamColor
 		setup(newGame)
+	Del()
+		del background
+		for(var/digit in digits)
+			del digit
+		. = ..()
 	proc
 		setup(game/newGame)
 			var teamPositions = list(TEAM_RED=6, TEAM_BLUE=13, TEAM_GREEN=3, TEAM_YELLOW=16)
 			var teamPosition = teamPositions[team]
 			//
-			var /game/hud/sprite/background = new(locate(teamPosition, world.maxy, newGame.zPosition))
+			background = new(locate(teamPosition, world.maxy, newGame.zPosition))
 			background.layer--
 			background.icon = 'digit_backgrounds.dmi'
 			background.icon_state = "score"
@@ -334,14 +486,21 @@ game/hud/timer
 	parent_type = /datum
 	var
 		digitColor = "#0c0"
+		game/hud/sprite/background
 		game/hud/sprite/digit/minute
 		game/hud/sprite/digit/second_10
 		game/hud/sprite/digit/second_1
 	New(game/newGame)
 		setup(newGame)
+	Del()
+		del background
+		del minute
+		del second_10
+		del second_1
+		. = ..()
 	proc
 		setup(game/newGame)
-			var /game/hud/sprite/background = new(locate(9, world.maxy, newGame.zPosition))
+			background = new(locate(9, world.maxy, newGame.zPosition))
 			background.layer--
 			background.icon = 'digit_backgrounds.dmi'
 			background.icon_state = "time"

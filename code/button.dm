@@ -7,7 +7,7 @@ button
 	icon = 'gameplay_buttons.dmi'
 	bound_width  = 64
 	bound_height = 32
-	layer = FLY_LAYER
+	plane = PLANE_BUTTON
 	var
 		displayName
 	New()
@@ -19,3 +19,12 @@ button
 			icon_state = "[displayName]_down"
 			sleep(2)
 			icon_state = "[displayName]_up"
+
+	resultsDone
+		parent_type = /button
+		displayName = "done"
+		screen_loc = "8:8,1:8"
+		Click()
+			. = ..()
+			usr.client.screen.Remove(src)
+			system.titleScreen.addPlayer(usr.client)
